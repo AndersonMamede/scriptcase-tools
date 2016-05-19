@@ -3,7 +3,9 @@ A Chrome extension to make working with Scriptcase simplier and more productive.
 
 ### Why?
 If you often use Scriptcase to develop your applications, you've probably noticed that its development environment lacks some basic functionalities (e.g., shortcut keys), while others could be improved (e.g., code editor).
+
 Even though some users pointed out some of the problems on Scriptcase official forum, those improvements were not made.
+
 This Chrome extension was created to fulfill these gaps.
 
 ### How does it work?
@@ -22,7 +24,7 @@ Go to [Chrome Web Store](https://chrome.google.com/webstore) to install the rele
 5. Click "**Load unpacked extension...**" and select the (unzipped) source code folder
 
 ## Compatibility
-Scriptcase v7.1 (7.01.0021)
+Scriptcase v7.1
 
 ## Authors
 * [Anderson Mamede](https://github.com/AndersonMamede)
@@ -36,7 +38,7 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE.md) for more inform
 
 ### v0.1
 * Changes Scriptcase's main menu default behavior from "open when hover" to "open when click"
-* Changes code editor's fullscreen mode to collapse both left and right columns
+* Makes code editor's fullscreen mode collapse both left and right columns
 * Puts cursor and scroll back to its last position on code editor after saving/generating/running an application and when navigating through Scriptcase's left menu (events, applications settings, etc)
 * Adds shortcuts keys:
 	* F2 => Save current application (same as the save button in the toolbar)
