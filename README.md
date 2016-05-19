@@ -32,7 +32,7 @@ Because of the difficulty of testing under different versions (licenses/$$), cur
 ## Legal and License
 This project is not affiliated with, sponsored by, or endorsed by Netmake Soluções em Informática.
 
-Licensed under the MIT License. Please see [LICENSE](LICENSE.md) for more information.
+Licensed under the MIT License. Please see [LICENSE](LICENSE) for more information.
 
 ## Features
 
