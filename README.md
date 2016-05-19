@@ -24,7 +24,7 @@ Go to [Chrome Web Store](https://chrome.google.com/webstore) to install the rele
 5. Click "**Load unpacked extension...**" and select the (unzipped) source code folder
 
 ## Compatibility
-Scriptcase v7.1
+Because of the difficulty of testing under different versions (licenses/$$), currently it is tested only under Scriptcase 7.
 
 ## Authors
 * [Anderson Mamede](https://github.com/AndersonMamede)
