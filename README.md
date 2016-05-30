@@ -42,7 +42,7 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 * Puts cursor and scroll back to its last position on code editor after saving/generating/running an application and when navigating through Scriptcase's left menu (events, applications settings, etc)
 * Adds shortcuts keys:
 	* F2 => Save current application (same as the save button in the toolbar)
-	* F7 => Put focus on code editor
+	* F7 => Give focus to code editor
 	* F8 => Generate source code for current application (same as the generate source code button in the toolbar)
 	* F9 => Run current application (same as the run button in the toolbar= save, generate and run)
 	* F11 => Toggle code editor's fullscreen mode
