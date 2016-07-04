@@ -1,20 +1,20 @@
-# Scriptcase Tools
-A Chrome extension to make working with Scriptcase simplier and more productive.
+# ScriptCase Tools
+A Chrome extension to make working with ScriptCase simplier and more productive.
 
 ### Why?
-If you often use Scriptcase to develop your applications, you've probably noticed that its development environment lacks some basic functionalities (e.g., shortcut keys), while others could be improved (e.g., code editor).
+If you often use ScriptCase to develop your applications, you've probably noticed that its development environment lacks some basic functionalities (e.g., shortcut keys), while others could be improved (e.g., code editor).
 
-Even though some users pointed out some of the problems on Scriptcase official forum, those improvements were not made.
+Even though some users pointed out some of the problems on ScriptCase official forum, those improvements were not made.
 
 This Chrome extension was created to fulfill these gaps.
 
 ### How does it work?
-Because Scriptcase doesn't provide a public API, hacking into its JavaScript/HTML/CSS code was the (only) way to go. And because of that, this extension heavily depends on Scriptcase's code and structure (e.g., specifics JavaScript functions, the DOM structure, some elements with specific ID/class name).
+Because ScriptCase doesn't provide a public API, hacking into its JavaScript/HTML/CSS code was the (only) way to go. And because of that, this extension heavily depends on ScriptCase's code and structure (e.g., specifics JavaScript functions, the DOM structure, some elements with specific ID/class name).
 
 ## Installation
 
 ### Quick Installation
-Go to [Chrome Web Store](https://chrome.google.com/webstore) to install the release version.
+Go to [Chrome Web Store](https://chrome.google.com/webstore) (soon) to install the release version.
 
 ### Manual Installation (latest/development version)
 1. Download this source code (https://github.com/AndersonMamede/scriptcase-tools)
@@ -23,8 +23,13 @@ Go to [Chrome Web Store](https://chrome.google.com/webstore) to install the rele
 4. Ensure the checkbox labeled **Developer mode** is enabled
 5. Click "**Load unpacked extension...**" and select the (unzipped) source code folder
 
-## Compatibility
-Because of the difficulty of testing under different versions (licenses/$$), currently it is tested only under **Scriptcase 7**.
+## ScriptCase Support
+* ScriptCase v7
+* ScriptCase v8
+
+Other ScriptCase versions might work correctly, but were not tested.
+
+Any problem with ScriptCase Tools in the above Scriptcases environment should be reported as a bug.
 
 ## Authors
 * [Anderson Mamede](https://github.com/AndersonMamede)
@@ -37,9 +42,10 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 ## Features
 
 ### v0.1
-* Changes Scriptcase's main menu default behavior from "open when hover" to "open when click"
+* Changes ScriptCase's main menu default behavior from "open when hover" to "open when click"
 * Makes code editor's fullscreen mode collapse both left and right columns
-* Puts cursor and scroll back to its last position on code editor after saving/generating/running an application and when navigating through Scriptcase's left menu (events, applications settings, etc)
+* Puts cursor and scroll back to its last position on code editor after saving/generating/running an application and when navigating through ScriptCase's left menu (events, applications settings, etc)
+* Puts cursor and scroll back to its last position on code editor when an application tab is clicked (application tab = 'Home' or your application)
 * Adds shortcuts keys:
 	* F2 => Save current application (same as the save button in the toolbar)
 	* F7 => Give focus to code editor
