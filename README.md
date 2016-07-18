@@ -29,10 +29,16 @@ Go to [Chrome Web Store](https://chrome.google.com/webstore) (soon) to install t
 
 Other ScriptCase versions might work correctly, but were not tested.
 
-Any problem with ScriptCase Tools in the above Scriptcases environment should be reported as a bug.
+Any problem with ScriptCase Tools in the above Scriptcases environment should be reported as a bug in our [issue tracker](https://github.com/AndersonMamede/scriptcase-tools/issues) or as a message to [mamede.anderson@gmail.com](mailto:mamede.anderson@gmail.com).
 
 ## Authors
 * [Anderson Mamede](https://github.com/AndersonMamede)
+
+## Contributing
+* Fork this repository
+* Submit [bug reports, ideas or new features](https://github.com/AndersonMamede/scriptcase-tools/issues)<br><br>
+
+If you are working on a new feature, please [create an issue](https://github.com/AndersonMamede/scriptcase-tools/issues) for the feature you’re working on so that we can all avoid duplicating effort. When your new feature (or fix) is ready, submit a pull request and/or attach a patch to your issue.
 
 ## Legal and License
 This project is not affiliated with, sponsored by, or endorsed by Netmake Soluções em Informática.
