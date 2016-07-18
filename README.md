@@ -2,9 +2,9 @@
 A Chrome extension to make working with ScriptCase simplier and more productive.
 
 ### Why?
-If you often use ScriptCase to develop your applications, you've probably noticed that its development environment lacks some basic functionalities (e.g., shortcut keys), while others could be improved (e.g., code editor).
+If you often use ScriptCase to develop your applications, you've probably noticed that its development environment lacks some basic functionalities (e.g., no shortcut keys, not restoring last cursor position), while others could be improved (e.g., code editor, main menu sensitivity).
 
-Even though some users pointed out some of the problems on ScriptCase official forum, those improvements were not made.
+Even though some users have pointed out some of the problems on ScriptCase official forum, those improvements haven't been made yet.
 
 This Chrome extension was created to fulfill these gaps.
 
@@ -44,7 +44,7 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 ### v0.1
 * Changes ScriptCase's main menu default behavior from "open when hover" to "open when click"
 * Makes code editor's fullscreen mode collapse both left and right columns
-* Puts cursor and scroll back to its last position on code editor after saving/generating/running an application and when navigating through ScriptCase's left menu (events, applications settings, etc)
+* Puts cursor and scroll back to its last position on code editor after saving/generating/running an application and when navigating through ScriptCase's pages (e.g., events, applications settings,)
 * Puts cursor and scroll back to its last position on code editor when an application tab is clicked (application tab = 'Home' or your application)
 * Adds shortcuts keys:
 	* F2 => Save current application (same as the save button in the toolbar)
