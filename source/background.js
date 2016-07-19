@@ -23,20 +23,17 @@
 				return;
 			}
 			
-			// loads stored settings (from localStorage);
 			try{
 				settings = JSON.parse(localStorage.getItem("sctSettings"));
 			}catch(ex){}
 			
-			// if no settings were found, then it should be created (using defaultSettings)
 			if(!settings){
-				// makes a COPY of defaultSettings (defaultSettings should not be changed,
+				// make a copy of defaultSettings (defaultSettings should not be changed,
 				// otherwise any change would be reflected to the original object)
 				localStorage.setItem("sctSettings", JSON.stringify(sctHelper.getDefaultSettings()));
 			}
 		},
 		
-		// returns a COPY of defaultSettings
 		getDefaultSettings : function(){
 			var _settings = {};
 			for(var key in defaultSettings){

@@ -31,11 +31,6 @@
 			});
 		},
 		
-		// checks if current url matches the given address
-		urlMatchesSc : function(address){
-			return window.location.href.search(address) != -1;
-		},
-		
 		loadSettingsFromBackgroundPage : function(callback){
 			chrome.runtime.sendMessage({
 				command : "getSettings"
@@ -62,12 +57,12 @@
 			});
 		},
 		
-		// returns the active tab in ScriptCase (like "Home" or an application)
-		getActiveTab : function(){
-			return fn.findElement(".nmAbaAppOn");
+		getScActiveTabName : function(){
+			var activeTab = fn.findElement(".nmAbaAppOn");
+			var element = activeTab && activeTab.querySelector(".nmAbaAppText");
+			return element && element.innerText.trim() || null;
 		},
 		
-		// returns the active/visible "#id_div_code" element
 		getActiveDivCode : function(){
 			var visibleFrmBot = fn.getVisibleFrmBot();
 			
@@ -81,14 +76,6 @@
 			);
 		},
 		
-		// returns the name of the active tab in ScriptCase (like "Home" or an application)
-		getActiveTabName : function(){
-			var activeTab = fn.getActiveTab();
-			var element = activeTab && activeTab.querySelector(".nmAbaAppText");
-			return element && element.innerText.trim() || null;
-		},
-		
-		// returns the name of the event currently being edited
 		getCurrentEditorEventName : function(){
 			var visibleFrmBot = fn.getVisibleFrmBot();
 			
@@ -104,7 +91,7 @@
 			return element && element.innerText.trim() || null;
 		},
 		
-		// creates and appends a script with a js code in a DOCUMENT
+		// append a script with javascript code in a DOCUMENT
 		// ps: doing this, the code's context changes (it runs
 		// in the content script's context/sandbox)
 		appendScript : function(_document, fnCode){
@@ -137,7 +124,6 @@
 			_document.body.appendChild(script);
 		},
 		
-		// changes ScriptCase's main menu default behavior 'open when hover' to 'open when click'
 		disableHoverOnMainMenu : function(){
 			fn.appendScript(document, function(){
 				if(typeof $ != "function" || !$("#topnav").length){
@@ -170,16 +156,12 @@
 			});
 		},
 		
-		// changes the editor's default fullscreen option so it can collapses both left and right columns
 		addToggleFullScreenEditor : function(){
 			fn.appendScript(document, function(){
-				// skip if the function 'toggleFullscreenEditing' doesn't
-				// exist (because this is the function where the changes are made)
 				if(typeof toggleFullscreenEditing != "function"){
 					return;
 				}
 				
-				// finds the editor's 'fullscreen toggle button'
 				var $fullScreenButton = $(".toolbar_editor img[onclick^='toggleFullscreenEditing']");
 				$fullScreenButton.prop("title", "Fullscreen (F11)");
 				
@@ -191,30 +173,31 @@
 						var result = _original_toggleFullscreenEditing();
 						var useFullScreen = $(".CodeMirror-scroll").hasClass("fullscreen");
 						
-						// hides the column in the left side of the editor
-						window.parent.$(".ui-layout-west")[useFullScreen ? "hide" : "show"]();
+						if(typeof window.parent.nm_toggle_left_layout == "function"){
+							window.parent.nm_toggle_left_layout();
+						}else{
+							window.parent.$(".ui-layout-west")[useFullScreen ? "hide" : "show"]();
+							
+							// fix editor's scroll, as (for some reason) it was being hidden
+							$(".CodeMirror-scroll").css("right", useFullScreen ? 10 : 0);
+							$(".CodeMirror-scrollbar").css({
+								position : useFullScreen ? "absolute" : "relative",
+								right : 0,
+								zIndex : 1
+							});
+						}
 						
-						// fix editor's scroll, as (for some reason) it was being hidden
-						$(".CodeMirror-scroll").css("right", useFullScreen ? 10 : 0);
-						$(".CodeMirror-scrollbar").css({
-							position : useFullScreen ? "absolute" : "relative",
-							right : 0,
-							zIndex : 1
-						});
-						
-						// returns whatever the original function used to return
 						return result;
 					}
 				})();
 			});
 		},
 		
-		// makes some changes on the page so cursor/scroll can be controlled when needed
 		prepareToControlEditorCursor : function(){
-			// changes ScriptCase's native ajax_set_show_app, so when user
-			// clicks on an application tab (or ajax_set_show_app is called),
+			// change ScriptCase's native ajax_set_show_app, so when an
+			// application tab is clicked (or ajax_set_show_app is called),
 			// the cursor/scroll is loaded
-			if(fn.urlMatchesSc("devel/iface/main.php")){
+			if(window.location.href.search("devel/iface/main.php") != -1){
 				fn.appendScript(document, function(){
 					if(!ajax_set_show_app){
 						return;
@@ -229,7 +212,6 @@
 							
 							window.postMessage({command : "loadCursorPosition"}, "*");
 							
-							// returns whatever the original function used to return
 							return result;
 						};
 					})();
@@ -239,7 +221,7 @@
 			// ps: 'sctEditorCursorPosition' was added in window because
 			// it's also used by background.js
 			window.sctEditorCursorPosition = {
-				// makes a request to save cursor position (communication made
+				// make a request to save cursor position (communication made
 				// between content script and web page)
 				requestSave : function(){
 					fn.appendScript(document, function(){
@@ -260,9 +242,9 @@
 					});
 				},
 				
-				// stores the current application's cursor position in localStorage
+				// store the current application's cursor position in localStorage
 				save : function(info){
-					var applicationName = fn.getActiveTabName();
+					var applicationName = fn.getScActiveTabName();
 					var editorEventName = fn.getCurrentEditorEventName() || "";
 					var identifier = applicationName + "-" + editorEventName;
 					
@@ -282,8 +264,8 @@
 							scroll : info.scroll
 						});
 					}catch(ex){
-						// resets localstorage if any error occurs
-						// and starts saving again
+						// reset localstorage if any error occurs
+						// and start saving again
 						localStorage.setItem("sctEditorConfig", JSON.stringify({}));
 						_store(identifier, {
 							cursor : info.cursor,
@@ -292,10 +274,10 @@
 					}
 				},
 				
-				// loads current application's cursor and scroll position
+				// load current application's cursor and scroll position
 				// (from localStorage to editor)
 				load : function(){
-					var applicationName = fn.getActiveTabName();
+					var applicationName = fn.getScActiveTabName();
 					var editorEventName = fn.getCurrentEditorEventName() || "";
 					var identifier = applicationName + "-" + editorEventName;
 					var editorConfig = JSON.parse(localStorage.getItem("sctEditorConfig"));
@@ -324,7 +306,6 @@
 			};
 		},
 		
-		// saves cursor position in editor and loads it back when a page is loaded
 		controlEditorCursor : function(){
 			fn.prepareToControlEditorCursor();
 			
@@ -335,19 +316,17 @@
 				return;
 			}
 			
-			// saves the cursor/scroll position before closing a DOCUMENT/page
 			window.onbeforeunload = function(){
 				window.sctEditorCursorPosition.requestSave();
 			};
 			
-			// saves the cursor/scroll position when user leaves editor's field
 			editorTextarea.addEventListener("blur", function(){
 				window.sctEditorCursorPosition.requestSave();
 			});
 			
-			// delays execution, so it runs after the settings were loaded
+			// delay execution, so it runs after the settings were loaded
 			setTimeout(function(){
-				// loads the cursor/scroll position on the editor when DOCUMENT is loaded
+				// load the cursor/scroll position on the editor when the DOCUMENT is loaded
 				window.sctEditorCursorPosition.load();
 			}, 10);
 		},
@@ -388,7 +367,7 @@
 			
 			var commandKeys = _getCommandKeys();
 			
-			// prevents browser's default behavior (if key is a shortcut key)
+			// prevent the browser's default behavior (if key is a shortcut key)
 			document.addEventListener("keydown", function(evt){
 				if(commandKeys[evt.keyCode]){
 					evt.preventDefault();
@@ -397,8 +376,8 @@
 				}
 			});
 			
-			// sends a message to background.js when user presses a
-			// shortcut key (actually when user releases the shortcut key)
+			// send a message to background.js when a shortcut key is pressed
+			// (actually when user releases the shortcut key)
 			document.addEventListener("keyup", function(evt){
 				if(!commandKeys[evt.keyCode]){
 					return;
@@ -412,7 +391,6 @@
 			});
 		},
 		
-		// executes a shortcut command
 		executeShortcutCommand : function(command){
 			switch(command){
 				case "saveApp":
@@ -430,7 +408,7 @@
 						return;
 					}
 					
-					// blurs the active element to trigger its events (input, editor, etc)
+					// blur the active element to trigger its events (input, editor, etc)
 					document.activeElement && document.activeElement.blur();
 					
 					button.click();
@@ -444,7 +422,7 @@
 			}
 			
 			if(command == "runApp"){
-				// waits the end of the process to focus editor
+				// wait for the end of the process to focus editor
 				var interval = setInterval(function(){
 					if(button.getAttribute("processRunning") == "0"){
 						clearInterval(interval);
@@ -454,7 +432,7 @@
 			}
 		},
 		
-		// returns the (global) top window (usually 'scriptcase/devel/iface/index.php?rand=*')
+		// return the top window object (usually 'scriptcase/devel/iface/index.php?rand=*')
 		getTopWindow : function(){
 			var topWindow = window;
 			
@@ -465,7 +443,7 @@
 			return topWindow;
 		},
 		
-		// returns an array containing all DOCUMENT elements in a chrome tab (recursive)
+		// return an array containing all document objects (recursively)
 		getDocumentList : function(topWindow){
 			var _getDocuments = function(_window){
 				var _documents = [_window.document];
@@ -480,10 +458,10 @@
 			return _getDocuments(topWindow || fn.getTopWindow());
 		},
 		
-		// returns the visible div_frm_bot_* (the div element containing the application
+		// return the visible div_frm_bot_* (the div element containing the application
 		// options that is currently active)
 		getVisibleFrmBot : function(){
-			var frmBotList = fn.findElement("[id^=div_frm_bot_]", false);
+			var frmBotList = fn.findElement("[id^=div_frm_bot_]", false) || [];
 			var visibleFrmBot = null;
 			
 			frmBotList.some(function(_frmBot){
@@ -496,7 +474,7 @@
 			return visibleFrmBot && visibleFrmBot.children.length ? visibleFrmBot : null;
 		},
 		
-		// searches for elements in every DOCUMENT found within the (chrome) tab (including iframes);
+		// search for elements in every document found within the (chrome) tab
 		findElement : function(selector, returnFirstElement, documentList){
 			returnFirstElement = typeof returnFirstElement != "undefined" ? returnFirstElement : true;
 			documentList = typeof documentList != "undefined" ? documentList : fn.getDocumentList();
@@ -518,7 +496,6 @@
 			return elements.length ? (returnFirstElement ? elements[0] : elements) : null;
 		},
 		
-		// makes some changes on the page to use shortcut keys
 		prepareToUseShortcutKeys : function(){
 			fn.appendScript(document, function(){
 				// skip if the function 'nm_app_run' doesn't
@@ -527,7 +504,7 @@
 					return;
 				}
 				
-				// wrapps the original function to add extra functionality
+				// wrapp the original function to add extra functionality
 				nm_app_run = (function(){
 					var _original_nm_app_run = nm_app_run;
 					
@@ -554,7 +531,6 @@
 			});
 		},
 		
-		// opens macro's documentation page
 		openMacroDoc : function(macroName){
 			if(!macroName || !macroName.length){
 				return;

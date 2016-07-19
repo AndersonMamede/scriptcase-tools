@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function(){
 			fn.bindEvents();
 		},
 		
-		// load saved settings to popup fields
 		loadSettings : function(){
 			chrome.runtime.sendMessage({command:"getSettings"}, function(settings){
 				fn.loadSettingsToFields(settings);
@@ -191,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function(){
 							break;
 							case "checkbox":
 								input.checked = !input.checked;
-								// fires the change event, so container ".shortcut-keys-container" can be updated
+								// fire the change event, so container ".shortcut-keys-container" can be updated
 								input.dispatchEvent(new Event("change"));
 							break;
 						}
