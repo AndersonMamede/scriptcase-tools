@@ -14,7 +14,7 @@ Because ScriptCase doesn't provide a public API, hacking into its JavaScript/HTM
 ## Installation
 
 ### Quick Installation
-Go to [Chrome Web Store](https://chrome.google.com/webstore) (soon) to install the release version.
+Go to [Chrome Web Store](https://chrome.google.com/webstore/detail/scriptcase-tools/mfokofbgiajojbgginjeglebmpejnpdm) to install the release version.
 
 ### Manual Installation (latest/development version)
 1. Download this source code (https://github.com/AndersonMamede/scriptcase-tools)
