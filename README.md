@@ -49,7 +49,7 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ### v0.1
 * Changes ScriptCase's main menu default behavior from "open when hover" to "open when click"
-* Makes code editor's fullscreen mode collapse both left and right columns
+* Makes code editor's fullscreen mode collapse both left and right columns (not possible before SC v8)
 * Puts cursor and scroll back to its last position on code editor after saving/generating/running an application and when navigating through ScriptCase's pages (e.g., events, applications settings,)
 * Puts cursor and scroll back to its last position on code editor when an application tab is clicked (application tab = 'Home' or your application)
 * Adds shortcuts keys:
