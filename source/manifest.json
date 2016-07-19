@@ -1,0 +1,34 @@
+{
+	"manifest_version" : 2,
+	
+	"version" : "0.1",
+	"name" : "ScriptCase Tools",
+	"icons" : {
+		"16" : "icon-16.png",
+		"32" : "icon-32.png",
+		"48" : "icon-48.png",
+		"96" : "icon-96.png",
+		"128" : "icon-128.png"
+	},
+	
+	"browser_action" : {
+		"default_title" : "ScriptCase Tools",
+		"default_popup" : "popup.html"
+	},
+	
+	"background" : {
+		"scripts" : ["background.js"]
+	},
+	
+	"content_scripts" : [{
+		"matches" : ["*://*/*/devel/iface/*"],
+		"js" : ["page_tools.js"],
+		"all_frames" : true
+	}],
+	
+	"web_accessible_resources" : ["icon-help.svg"],
+	
+	"permissions" : [
+		"tabs", "http://*/", "https://*/"
+	]
+}
