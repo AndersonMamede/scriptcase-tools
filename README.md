@@ -53,7 +53,7 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 * Puts cursor and scroll back to its last position on code editor after saving/generating/running an application and when navigating through ScriptCase's pages (e.g., events, applications settings,)
 * Puts cursor and scroll back to its last position on code editor when an application tab is clicked (application tab = 'Home' or your application)
 * Adds shortcuts keys:
-	* F1 => Show documentation (ScriptCase's macros)
+	* F1 => Show documentation (macros)
 	* F2 => Save current application (same as the save button in the toolbar)
 	* F7 => Give focus to code editor
 	* F8 => Generate source code for current application (same as the generate source code button in the toolbar)
