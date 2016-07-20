@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		loadSettingsToFields : function(data){
 			document.querySelector("#extEnabled").checked = data.extEnabled;
 			document.querySelector("#disableHoverOnMainMenu").checked = data.disableHoverOnMainMenu;
+			document.querySelector("#disableEditorLineWrapping").checked = data.disableEditorLineWrapping;
 			document.querySelector("#useShortcutKeys").checked = data.useShortcutKeys;
 			document.querySelector("#keyMacroDoc").value = data.keyMacroDoc;
 			document.querySelector("#keySaveApp").value = data.keySaveApp;
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			var newSettings = {
 				extEnabled : document.querySelector("#extEnabled").checked,
 				disableHoverOnMainMenu : document.querySelector("#disableHoverOnMainMenu").checked,
+				disableEditorLineWrapping : document.querySelector("#disableEditorLineWrapping").checked,
 				useShortcutKeys : document.querySelector("#useShortcutKeys").checked,
 				keyMacroDoc : document.querySelector("#keyMacroDoc").value.trim(),
 				keySaveApp : document.querySelector("#keySaveApp").value.trim(),

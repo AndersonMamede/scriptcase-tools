@@ -4,6 +4,7 @@
 	var defaultSettings = {
 		"extEnabled" : true,
 		"disableHoverOnMainMenu" : true,
+		"disableEditorLineWrapping" : true,
 		"useShortcutKeys" : true,
 		"keyMacroDoc" : "F1",
 		"keySaveApp" : "F2",
@@ -40,13 +41,26 @@
 				_settings[key] = defaultSettings[key];
 			}
 			return _settings;
+		},
+		
+		getCurrentSettings : function(){
+			var defaultSettings = sctHelper.getDefaultSettings();
+			var currentSettings = JSON.parse(localStorage.getItem("sctSettings"));
+			
+			for(var key in defaultSettings){
+				if(typeof currentSettings[key] == "undefined"){
+					currentSettings[key] = defaultSettings[key];
+				}
+			}
+			
+			return currentSettings;
 		}
 	};
 	
 	chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 		switch(request.command){
 			case "getSettings":
-				sendResponse(JSON.parse(localStorage.getItem("sctSettings")));
+				sendResponse(sctHelper.getCurrentSettings());
 			break;
 			case "getDefaultSettings":
 				sendResponse(sctHelper.getDefaultSettings());
