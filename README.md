@@ -47,6 +47,9 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ## Features
 
+### v0.2
+* Disables word/line wrapping in code editor (in SC v8, line wrapping was always on)
+
 ### v0.1
 * Changes ScriptCase's main menu default behavior from "open when hover" to "open when click"
 * Makes code editor's fullscreen mode collapse both left and right columns (not possible before SC v8)
