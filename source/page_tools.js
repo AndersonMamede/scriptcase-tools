@@ -17,6 +17,10 @@
 					fn.disableHoverOnMainMenu();
 				}
 				
+				if(settings.disableEditorLineWrapping){
+					fn.disableEditorLineWrapping();
+				}
+				
 				if(settings.loadCursorBack){
 					fn.controlEditorCursor();
 				}
@@ -153,6 +157,16 @@
 					e.stopPropagation();
 					$style.appendTo($head);
 				});
+			});
+		},
+		
+		disableEditorLineWrapping : function(){
+			fn.appendScript(document, function(){
+				if(!editor || !editor.setOption){
+					return;
+				}
+				
+				editor.setOption("lineWrapping", false);
 			});
 		},
 		
