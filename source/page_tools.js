@@ -162,7 +162,7 @@
 		
 		disableEditorLineWrapping : function(){
 			fn.appendScript(document, function(){
-				if(!editor || !editor.setOption){
+				if(typeof editor == "undefined" || !editor.setOption){
 					return;
 				}
 				
