@@ -47,10 +47,13 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ## Features
 
-### v0.2
+### v0.2.1
+* Fix: When code editor was not found within a page, a JS exception was thrown, caused by how the verification was made
+
+### v0.2.0
 * Disables word/line wrapping in code editor (in SC v8, line wrapping was always on)
 
-### v0.1
+### v0.1.0
 * Changes ScriptCase's main menu default behavior from "open when hover" to "open when click"
 * Makes code editor's fullscreen mode collapse both left and right columns (not possible before SC v8)
 * Puts cursor and scroll back to its last position on code editor after saving/generating/running an application and when navigating through ScriptCase's pages (e.g., events, applications settings,)
