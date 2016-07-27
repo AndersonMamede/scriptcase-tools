@@ -1,6 +1,10 @@
 # ScriptCase Tools
 A Chrome extension to make working with ScriptCase simplier and more productive.
 
+![alt tag](scriptcase-tools-settings.png)
+
+![alt tag](scriptcase-tools.png)
+
 ### Why?
 If you often use ScriptCase to develop your applications, you've probably noticed that its development environment lacks some basic functionalities (e.g., no shortcut keys, not restoring last cursor position), while others could be improved (e.g., code editor, main menu sensitivity).
 
