@@ -15,7 +15,7 @@ Go to [Chrome Web Store](https://goo.gl/i4LtVl) to install the release version.
 2. Unzip the file
 3. Navigate to **chrome://extensions**
 4. Ensure the checkbox labeled **Developer mode** is enabled
-5. Click "**Load unpacked extension...**" and select the "**source**" folder inside the unzipped folder
+5. Click "**Load unpacked extension...**" and select the "**source**" folder inside the (unzipped) folder
 
 ## ScriptCase Support
 * ScriptCase v7
