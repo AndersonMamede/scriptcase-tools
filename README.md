@@ -5,16 +5,6 @@ A Chrome extension to make working with ScriptCase simplier and more productive.
 
 ![alt tag](scriptcase-tools.png)
 
-### Why?
-If you often use ScriptCase to develop your applications, you've probably noticed that its development environment lacks some basic functionalities (e.g., no shortcut keys, not restoring last cursor position), while others could be improved (e.g., code editor, main menu sensitivity).
-
-Even though some users have pointed out some of the problems on ScriptCase official forum, those improvements haven't been made yet.
-
-This Chrome extension was created to fulfill these gaps.
-
-### How does it work?
-Because ScriptCase doesn't provide a public API, hacking into its JavaScript/HTML/CSS code was the (only) way to go. And because of that, this extension heavily depends on ScriptCase's code and structure (e.g., specifics JavaScript functions, the DOM structure, some elements with specific ID/class name).
-
 ## Installation
 
 ### Quick Installation
@@ -34,6 +24,16 @@ Go to [Chrome Web Store](https://goo.gl/i4LtVl) to install the release version.
 Other ScriptCase versions might work correctly, but were not tested.
 
 Any problem with ScriptCase Tools in the above Scriptcases environment should be reported as a bug in our [issue tracker](https://github.com/AndersonMamede/scriptcase-tools/issues) or as a message to [mamede.anderson@gmail.com](mailto:mamede.anderson@gmail.com).
+
+### Why?
+If you often use ScriptCase to develop your applications, you've probably noticed that its development environment lacks some basic functionalities (e.g., no shortcut keys, not restoring last cursor position), while others could be improved (e.g., code editor, main menu sensitivity).
+
+Even though some users have pointed out some of the problems on ScriptCase official forum, those improvements haven't been made yet.
+
+This Chrome extension was created to fulfill these gaps.
+
+### How does it work?
+Because ScriptCase doesn't provide a public API, hacking into its JavaScript/HTML/CSS code was the (only) way to go. And because of that, this extension heavily depends on ScriptCase's code and structure (e.g., specifics JavaScript functions, the DOM structure, some elements with specific ID/class name).
 
 ## Authors
 * [Anderson Mamede](https://github.com/AndersonMamede)
