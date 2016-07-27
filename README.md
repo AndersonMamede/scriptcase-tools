@@ -25,7 +25,7 @@ Other ScriptCase versions might work correctly, but were not tested.
 
 Any problem with ScriptCase Tools in the above Scriptcases environment should be reported as a bug in our [issue tracker](https://github.com/AndersonMamede/scriptcase-tools/issues) or as a message to [mamede.anderson@gmail.com](mailto:mamede.anderson@gmail.com).
 
-### Why?
+## Why was ScriptCase Tools built?
 If you often use ScriptCase to develop your applications, you've probably noticed that its development environment lacks some basic functionalities (e.g., no shortcut keys, not restoring last cursor position), while others could be improved (e.g., code editor, main menu sensitivity).
 
 Even though some users have pointed out some of the problems on ScriptCase official forum, those improvements haven't been made yet.
