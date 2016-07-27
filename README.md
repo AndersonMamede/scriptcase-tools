@@ -1,9 +1,9 @@
 # ScriptCase Tools
 A Chrome extension to make working with ScriptCase simplier and more productive.
 
-![alt tag](scriptcase-tools-settings.png)
-
 ![alt tag](scriptcase-tools.png)
+
+![alt tag](scriptcase-tools-settings.png)
 
 ## Installation
 
