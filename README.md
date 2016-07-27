@@ -3,6 +3,7 @@ A Chrome extension to make working with ScriptCase simplier and more productive.
 
 ![alt tag](scriptcase-tools.png)
 
+Options:
 ![alt tag](scriptcase-tools-settings.png)
 
 ## Installation
