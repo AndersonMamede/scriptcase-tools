@@ -1,5 +1,5 @@
 # ScriptCase Tools
-A Chrome extension to make working with ScriptCase simpler and more productive.
+A browser extension to make working with ScriptCase simpler and more productive.
 
 ![alt tag](scriptcase_tools.png)
 
@@ -28,7 +28,7 @@ If you often use ScriptCase to develop your applications, you've probably notice
 
 Even though some users have pointed out some of the problems on ScriptCase official forum, those improvements haven't been made yet.
 
-This Chrome extension was created to fulfill these gaps.
+This browser extension was created to fulfill these gaps.
 
 ### How does it work?
 Because ScriptCase doesn't provide a public API, hacking into its JavaScript/HTML/CSS code was the (only) way to go. And because of that, this extension heavily depends on ScriptCase's code and structure (e.g., specifics JavaScript functions, the DOM structure, some elements with specific ID/class name).
@@ -53,14 +53,14 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 * Fix: When code editor was not found within a page, a JS exception was thrown, caused by how the verification was made
 
 ### v0.2.0
-* Disables word/line wrapping in code editor (in SC v8, line wrapping was always on)
+* New option to disable word/line wrapping in code editor (in SC v8, line wrapping was always on)
 
 ### v0.1.0
-* Changes ScriptCase's main menu default behavior from "open when hover" to "open when click"
-* Makes code editor's fullscreen mode collapse both left and right columns (not possible before SC v8)
-* Puts cursor and scroll back to its last position on code editor after saving/generating/running an application and when navigating through ScriptCase's pages (e.g., events, applications settings,)
+* Option to change ScriptCase's main menu default behavior from "open when hover" to "open when click"
+* Option to make code editor's fullscreen mode collapse both left and right columns (not possible before SC v8)
+* Puts cursor and scroll back to its last position on code editor after saving/generating/running an application and when navigating through ScriptCase's pages (e.g., events, applications settings)
 * Puts cursor and scroll back to its last position on code editor when an application tab is clicked (application tab = 'Home' or your application)
-* Adds shortcuts keys:
+* New shortcuts keys:
 	* F1 => Show documentation (macros)
 	* F2 => Save current application (same as the save button in the toolbar)
 	* F7 => Give focus to code editor
