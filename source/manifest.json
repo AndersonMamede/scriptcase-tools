@@ -4,7 +4,7 @@
 	"version" : "0.2.1",
 	"name" : "ScriptCase Tools",
 	"short_name" : "SC Tools",
-	"description" : "A Chrome extension to make working with ScriptCase simplier and more productive",
+	"description" : "A Chrome extension to make working with ScriptCase simpler and more productive",
 	
 	"icons" : {
 		"16" : "icon-16.png",
