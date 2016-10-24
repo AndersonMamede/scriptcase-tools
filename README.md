@@ -8,7 +8,7 @@
 A browser extension to make working with ScriptCase simpler and more productive.
 
 <div style='text-align:center'>
-	![ScriptCase Tools](scriptcase_tools_1.1.0.png)
+	<img src="scriptcase_tools_1.1.0.png" title="ScriptCase Tools" alt="ScriptCase Tools">
 </div>
 
 ## Installation
