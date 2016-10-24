@@ -55,6 +55,24 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ## Features
 
+### v1.1.0
+* New option to prevent ScriptCase session from timing out
+* Now you can select a text (macro) on editor and press the shortcut key to open its documentation (default shortcut key is F1);
+* New feedback form in the popup/settings box
+
+### v1.0.0
+* 'Internal libraries' and 'HTML Templates' also restore last cursor and scroll position
+* New option to always restore last settings used to deploy
+* New option to switch ScriptCase's default code editor to a newer and more complete version of CodeMirror:
+	* Sublime Text-based shortcut keys (e.g., jump to line, selext next/all occurrences, duplicate line, etc)
+	* New special theme 'Sublime Text (Detailed)', which shows invisible characters (tab and white spaces);
+	* Highlight on editor and scrollbar all occurrences of the selected word/text
+	* Possibility to add bookmarks/breakpoints in your code (Ctrl+F1/Alt+F1)
+	* Possibility to fold/unfold code blocks (Ctrl+Q)
+	* Autocomplete for PHP functions
+	* Autocomplete for any word found within the editor
+	* Highlight the starting and ending brackets (), {} and [] when cursor touches it
+
 ### v0.2.1
 * Fix: When code editor was not found within a page, a JS exception was thrown, caused by how the verification was made
 
@@ -64,8 +82,8 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 ### v0.1.0
 * Option to change ScriptCase's main menu default behavior from "open when hover" to "open when click"
 * Option to make code editor's fullscreen mode collapse both left and right columns (not possible before SC v8)
-* Puts cursor and scroll back to its last position on code editor after saving/generating/running an application and when navigating through ScriptCase's pages (e.g., events, applications settings)
-* Puts cursor and scroll back to its last position on code editor when an application tab is clicked (application tab = 'Home' or your application)
+* Option to set cursor and scroll back to its last known position on code editor after saving/generating/running an application and when navigating through ScriptCase's pages (e.g., events, applications settings)
+* Option so set cursor and scroll back to its last known position on code editor when an application tab is clicked (application tab = 'Home' or your application)
 * New shortcuts keys:
 	* F1 => Show documentation (macros)
 	* F2 => Save current application (same as the save button in the toolbar)
