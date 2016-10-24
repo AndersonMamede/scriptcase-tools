@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>ScriptCase Tools</title>
+		<link href="popup.css" rel="stylesheet">
+	</head>
+	<body>
+		<div id="modal">
+			<div id="modal-body">
+				<div id="modal-title">&nbsp;</div>
+				<div id="modal-content"></div>
+				<div id="modal-toolbar">
+					<button id="bt-modal-ok" class="button">OK</button>
+				</div>
+			</div>
+		</div>
+		<div id="popup-title">
+			ScriptCase Tools v1.1.0
+			<img src="/assets/img/message.svg" id="send-message" class="blink" title="Click to send us message (feedback, suggestions, report bugs, etc)">
+		</div>
+		<div id="form-field">
+			<div class="field-container">
+				<input type="checkbox" id="extEnabled"/>
+				<label>Enable extension</label>
+			</div>
+			<div class="field-container">
+				<input type="checkbox" id="disableHoverOnMainMenu"/>
+				<label>Open ScriptCase's main menu on click (not on mouse over)</label>
+			</div>
+			<div class="field-container">
+				<input type="checkbox" id="restoreDeploySettings"/>
+				<label>Always restore last settings used to deploy</label>
+				<img src="/assets/img/icon-info.svg" class="info" data-info="restoreDeploySettings" width="16"/>
+			</div>
+			<div class="field-container">
+				<input type="checkbox" id="preventSessionTimeout"/>
+				<label>Prevent session timeout</label>
+				(ping every <input type="text" id="preventSessionTimeoutMinutes" class="param-input" maxlength="3" disabled/> minutes)
+				<img src="/assets/img/icon-info.svg" class="info" data-info="preventSessionTimeout" width="16"/>
+			</div>
+			<div class="field-container editor new-option">
+				<input type="checkbox" id="useNewEditor"/>
+				<label>Use new code editor</label>
+				<img src="/assets/img/icon-info.svg" class="info" data-info="useNewEditor" width="16"/>
+				<span>- See</span> <a href="/pages/key_bindings/index.html" target="_blank">key bindings</a>
+			</div>
+			<div class="field-container">
+				<input type="checkbox" id="disableEditorLineWrapping"/>
+				<label>Disable line/word wrapping in code editor</label>
+			</div>
+			<div class="field-container">
+				<input type="checkbox" id="useShortcutKeys"/>
+				<label>Enable shortcut keys</label>
+			</div>
+			<div class="shortcut-keys-container">
+				<div>Shortcut keys (F1 to F12):</div>
+				<div class="field-container">
+					<input type="text" id="keyMacroDoc" class="shortcut-key param-input" maxlength="3" disabled/>
+					<label>Show documentation (ScriptCase's macros)</label>
+				</div>
+				<div class="field-container">
+					<input type="text" id="keySaveApp" class="shortcut-key param-input" maxlength="3" disabled/>
+					<label>Save application</label>
+					<img src="/assets/img/icon-info.svg" class="info" data-info="keySaveApp" width="16"/>
+				</div>
+				<div class="field-container">
+					<input type="text" id="keyFocusEditor" class="shortcut-key param-input" maxlength="3" disabled/>
+					<label>Give focus to code editor</label>
+				</div>
+				<div class="field-container">
+					<input type="text" id="keyGenerateSource" class="shortcut-key param-input" maxlength="3" disabled/>
+					<label>Generate source code</label>
+					<img src="/assets/img/icon-info.svg" class="info" data-info="keyGenerateSource" width="16"/>
+				</div>
+				<div class="field-container">
+					<input type="text" id="keyRunApp" class="shortcut-key param-input" maxlength="3" disabled/>
+					<label>Run application</label>
+					<img src="/assets/img/icon-info.svg" class="info" data-info="keyRunApp" width="16"/>
+				</div>
+				<div class="field-container">
+					<input type="text" id="keyToggleEditorFullscreen" class="shortcut-key param-input" maxlength="3" value="F11" readonly disabled/>
+					<label>Toggle code editor's fullscreen mode</label>
+				</div>
+			</div>
+			<div class="field-container">
+				<input type="checkbox" id="loadCursorBack"/>
+				<label>Set cursor and scroll back to its last position (code editor)</label>
+			</div>
+			<div class="field-container">
+				<input type="checkbox" id="changeEditorFullscreen"/>
+				<label>Change code editor's fullscreen mode to also collapse left column</label>
+			</div>
+			<div class="button-container">
+				<button id="save-settings" class="button">Save settings</button>
+				<button id="load-default-settings" class="button">Load default settings</button>
+			</div>
+		</div>
+		<div id="feedback-container">
+			<div id="feedback">
+				Feedback from community members helps us to constantly improve our
+				features and tools. Use the field below to <strong>send us suggestions, share your
+				feedback, report bugs, or to let us know how we can improve</strong>.<br><br>
+				While we might not implement all suggestions, <strong>we do review all of them</strong>. Many
+				features came directly from your feedback and the best way to see new features
+				implemented is to tell us about them!<br><br>
+				Alternatively, you can contact us through the
+				<a href="https://github.com/AndersonMamede/scriptcase-tools" target="_blank">official repository at GitHub</a>.<br><br>
+				<div id="feedback-note">* If a reply is required, please include an e-mail address.</div>
+				<textarea id="feedback-message" cols="1" rows="1" autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
+			</div>
+		</div>
+		<script src="/assets/jquery.js"></script>
+		<script src="popup.js"></script>
+		<script src="Modal.js"></script>
+	</body>
+</html>

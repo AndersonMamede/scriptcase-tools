@@ -1,0 +1,297 @@
+*{
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+}
+
+body{
+	position: relative;
+	padding: 10px;
+	width: 450px;
+	font: normal 12px Verdana;
+	color: #616161;
+}
+
+a, a:visited{
+	color: #00719E;
+}
+
+label{
+	display: inline-block;
+	margin-bottom: 3px;
+}
+
+input[type="text"]{
+	padding: 2px 0 2px 2px;
+	border: 1px solid #D0D0D0;
+}
+
+input[readonly]{
+	background: #FBFBBD;
+	border-color: #DCD9D9;
+	color: #6D6A6A;
+}
+
+input[disabled],
+input.param-input[disabled]{
+	background: #ECECEC;
+	color: #AAAAAA;
+}
+
+input.param-input{
+	width: 35px;
+	vertical-align: initial;
+	text-align: center;
+	color: #3E3F40;
+}
+
+input[type="checkbox"] + label{
+	margin-bottom: 0;
+}
+
+.display-none{
+	display: none;
+}
+
+.opaque{
+	transform: 0.3s;
+	opacity: 0.7;
+}
+
+.opaque:hover{
+	opacity: 1;
+}
+
+.blink:not(:hover){
+	animation: blinker 1.2s ease infinite;
+}
+
+@keyframes blinker{
+	50%{ opacity: 0; }
+}
+
+#popup-title{
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	padding: 15px 0;
+	font-size: 26px;
+	font-weight: 800;
+	text-align: center;
+	background: #00B7FF;
+	color: #FFFFFF;
+}
+
+#form-field{
+	margin-top: 60px;
+}
+
+.field-container{
+	margin: 13px 0 10px 0;
+}
+
+.field-container.editor{
+	border-top: 1px solid #DEDEDE;
+	padding-top: 12px;
+	margin-top: 15px;
+}
+
+#extEnabled ~ label{
+	font-weight: bold;
+	color: #0795CE;
+}
+
+#useNewEditor ~ label{
+	font-weight: bold;
+	color: #EA4875;
+}
+
+.shortcut-keys-container:not(.active){
+	color: #929292;
+}
+
+.shortcut-keys-container .field-container{
+	margin: 2px 0 3px 0;
+}
+
+.button-container{
+	text-align: center;
+}
+
+.button{
+	transition: 0.3s;
+	position: relative;
+	margin: 0 5px;
+	padding: 4px 10px;
+	border: none;
+	border-radius: 2px;
+	background: #78909C;
+	color: #FAFAFA;
+	cursor: pointer;
+	outline: none;
+}
+
+.button:hover,
+.button:focus{
+	background: #455A64;
+	color: #FFFFFF;
+}
+
+.button.busy::before,
+.button.done::before,
+.button.fail::before{
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	transition: 0.3s;
+	border-radius: inherit;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #FFFFFF;
+}
+
+.button.busy::before{
+	background-image: url("/assets/img/loading.svg");
+}
+
+.button.busy.done::before,
+.button.done::before{
+	background-image: url("/assets/img/done.svg");
+}
+.button.busy.fail::before,
+.button.fail::before{
+	background-image: url("/assets/img/cross.svg");
+}
+
+#load-default-settings{
+	background: #B0BEC5;
+}
+
+#load-default-settings:hover,
+#load-default-settings:focus{
+	background: #455A64;
+}
+
+.info{
+	margin-left: 5px;
+	vertical-align: sub;
+	transition: 0.3s;
+	opacity: 0.3;
+	cursor: pointer;
+}
+
+.info:hover{
+	opacity: 1;
+}
+
+#modal{
+	color: #626262;
+}
+
+#modal:not(.active){
+	display: none;
+}
+
+#modal::before{
+	z-index: 99999998;
+	content: "";
+	display: inline-block;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+#modal-body{
+	z-index: 99999999;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+	background: #FFFFFF;
+}
+
+#modal-title{
+	padding: 10px;
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: underline;
+	color: #203CD6;
+}
+
+#modal-content{
+	overflow: auto;
+	padding: 0 15px;
+	height: 425px;
+	box-sizing: border-box;
+	font-size: 13px;
+	line-height: 18px;
+}
+
+#modal-content p{
+	margin: 5px 0;
+}
+
+#modal-content u,
+#modal-content b,
+#modal-content i,
+#modal-content a,
+#modal-content strong{
+	vertical-align: bottom;
+}
+
+#modal-content u,
+#modal-content i,
+#modal-content a{
+	color: #3749AF;
+}
+
+#modal-content b{
+	color: #CE0E00;
+}
+
+#modal-toolbar{
+	padding: 10px;
+	text-align: center;
+}
+
+#send-message{
+	transition: 0.3s;
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	width: 24px;
+	cursor: pointer;
+}
+
+#feedback-container{
+	display: none;
+}
+
+#feedback-note{
+	margin-bottom: 10px;
+}
+
+#feedback-message{
+	box-sizing: border-box;
+	padding: 5px;
+	width: 402px;
+	height: 153px;
+	resize: none;
+	border: 1px solid #AAA;
+	background: #FFFFFF;
+}
+
+#feedback-note{
+	color: #F44336;
+}

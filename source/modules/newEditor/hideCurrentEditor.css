@@ -1,0 +1,11 @@
+html:not(.useOriginalEditor) body:not(.useOriginalEditor) #id_td_code,
+html:not(.useOriginalEditor) body:not(.useOriginalEditor) .toolbar_editor{
+	opacity: 0!important;
+	background: red!Important;
+}
+
+html:not(.useOriginalEditor) body:not(.useOriginalEditor) #id_div_code .nmTable{
+	border-top: none;
+	border-right: none;
+	border-left: none;
+}

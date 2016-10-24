@@ -1,0 +1,249 @@
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+</style>
+
+<link rel=stylesheet href="__NEW_EDITOR_PATH__/cm/lib/codemirror.css">
+<link rel=stylesheet href="__NEW_EDITOR_PATH__/cm/addon/dialog/dialog.css">
+<link rel=stylesheet href="__NEW_EDITOR_PATH__/cm/addon/hint/show-hint.css">
+<link rel=stylesheet href="__NEW_EDITOR_PATH__/cm/addon/fold/foldgutter.css">
+
+<style>
+	html, body{
+		font: normal 12px Verdana;
+		background: #F4F4F4;
+	}
+	
+	.display-none{
+		display: none!important;
+	}
+	
+	body #new-editor{
+		opacity: 0;
+	}
+	
+	#container{
+		position: relative;
+		width: 100%;
+		height: 100vh;
+	}
+	
+	#toolbar{
+		transition: 0.3s;
+		background: #ECE9D8;
+		position: absolute;
+		z-index: 999;
+		top: 0;
+		right: 0;
+		left: 0;
+		height: 23px;
+		border-bottom: 1px solid #E4E1CE;
+	}
+	body:not(.ready) #toolbar{
+		opacity: 0;
+	}
+	#toolbar ul, #toolbar li{
+		list-style: none;
+	}
+	#toolbar ul{
+		text-align: center;
+	}
+	#toolbar li{
+		display: inline-block;
+		margin-top: 4px;
+		width: 16px;
+		height: 16px;
+		vertical-align: middle;
+		background-repeat: no-repeat;
+	}
+	#toolbar li:not(:first-child){
+		margin-left: 4px;
+	}
+	#toolbar li:not(:last-child){
+		margin-right: 4px;
+	}
+	#toolbar .button{
+		cursor: pointer;
+	}
+	#toolbar #bt-attributes{
+		background-image: url("__NEW_EDITOR_PATH__/img/attributes.png");
+	}
+	#toolbar #bt-fullscreen{
+		background-image: url("__NEW_EDITOR_PATH__/img/fullscreen.png");
+	}
+	#toolbar #bt-search{
+		background-image: url("__NEW_EDITOR_PATH__/img/search.png");
+	}
+	#toolbar #bt-replace{
+		background-image: url("__NEW_EDITOR_PATH__/img/replace.png");
+	}
+	#toolbar #bt-help{
+		background-image: url("__NEW_EDITOR_PATH__/img/help.png");
+	}
+	#toolbar #bt-key-bindings{
+		background-image: url("__NEW_EDITOR_PATH__/img/key.png");
+	}
+	#toolbar #bt-scriptcase-tools{
+		cursor: auto;
+		background-image: url("__NEW_EDITOR_PATH__/../../assets/img/icon-16.png");
+	}
+	li#container-field-theme{
+		margin-top: 0;
+		width: auto;
+	}
+	#field-theme{
+		width: 250px;
+		border: 1px solid #CCCCCC;
+	}
+	
+	.CodeMirror{
+		position: absolute;
+		top: 23px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: auto;
+	}
+	.CodeMirror pre{
+		font-size: 14px!important;
+		font-family: monospace!important;
+		line-height: 16px;
+	}
+	.CodeMirror-foldgutter-open:after,
+	.CodeMirror-foldgutter-folded:after{
+		margin-left: -1px;
+		line-height: 15px;
+		font-size: 17px;
+	}
+	.CodeMirror-foldgutter-open:after{
+		color: #999C9E;
+	}
+	.CodeMirror-foldgutter-folded:after{
+		color: #0041FF;
+		text-shadow: 0 0 3px rgba(0, 0, 255, 0.8);
+	}
+	.CodeMirror .breakpoints{
+		width: .8em;
+		cursor: pointer
+	}
+	.CodeMirror-gutter.breakpoints:hover{
+		background: rgba(255, 255, 255, 0.1);
+	}
+	.CodeMirror .breakpoint::before{
+		content: "";
+		display: inline-block;
+		margin-top: 6px;
+		margin-left: 3px;
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+		background: #B22;
+	}
+	.CodeMirror .breakpoint{
+		padding-bottom: 2px;
+		cursor: pointer;
+	}
+	.CodeMirror .breakpoint:hover{
+		background: rgba(255, 255, 255, 0.3);
+	}
+	.CodeMirror .cm-matchhighlight{
+		position: relative;
+		background: none;
+	}
+	.CodeMirror .cm-matchhighlight::before{
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+	.CodeMirror-selection-highlight-scrollbar{
+		background-color: #00B93F;
+		height: 5px!important;
+	}
+	.CodeMirror-gutter-background.CodeMirror-activeline-gutter{
+		background: rgba(255, 255, 255, 0.1);
+		width: 37px!important;
+	}
+	.CodeMirror-linenumber.CodeMirror-gutter-elt{
+		margin-top: 2px;
+	}
+	.CodeMirror .cm-matchhighlight::before{
+		border: 1px solid #62FF00;
+	}
+</style>
+<link rel=stylesheet href="__NEW_EDITOR_PATH__/cm/theme/all.css">
+<div id="container">
+	<div id="toolbar">
+		<ul>
+			<li id="bt-attributes" class="button display-none" title=""></li>
+			<li id="bt-fullscreen" class="button" title="Fullscreen"></li>
+			<li id="bt-search" class="button" title="Search"></li>
+			<li id="bt-replace" class="button" title="Replace"></li>
+			<li id="bt-help" class="button" title="Help"></li>
+			<li id="container-field-theme" title="Theme">
+				<span>
+					Theme:
+					<select id="field-theme">
+						<option value="3024-day">3024-day</option>
+						<option value="3024-night">3024-night</option>
+						<option value="abcdef">abcdef</option>
+						<option value="ambiance-mobile">ambiance-mobile</option>
+						<option value="ambiance">ambiance</option>
+						<option value="base16-dark">base16-dark</option>
+						<option value="base16-light">base16-light</option>
+						<option value="bespin">bespin</option>
+						<option value="blackboard">blackboard</option>
+						<option value="cobalt">cobalt</option>
+						<option value="default">default</option>
+						<option value="colorforth">colorforth</option>
+						<option value="dracula">dracula</option>
+						<option value="eclipse">eclipse</option>
+						<option value="elegant">elegant</option>
+						<option value="erlang-dark">erlang-dark</option>
+						<option value="hopscotch">hopscotch</option>
+						<option value="icecoder">icecoder</option>
+						<option value="isotope">isotope</option>
+						<option value="lesser-dark">lesser-dark</option>
+						<option value="liquibyte">liquibyte</option>
+						<option value="material">material</option>
+						<option value="mbo">mbo</option>
+						<option value="mdn-like">mdn-like</option>
+						<option value="midnight">midnight</option>
+						<option value="monokai">monokai</option>
+						<option value="neat">neat</option>
+						<option value="neo">neo</option>
+						<option value="night">night</option>
+						<option value="panda-syntax">panda-syntax</option>
+						<option value="paraiso-dark">paraiso-dark</option>
+						<option value="paraiso-light">paraiso-light</option>
+						<option value="pastel-on-dark">pastel-on-dark</option>
+						<option value="railscasts">railscasts</option>
+						<option value="rubyblue">rubyblue</option>
+						<option value="seti">seti</option>
+						<option value="solarized">solarized</option>
+						<option value="sublime-text">Sublime Text</option>
+						<option value="sublime-text-detailed">Sublime Text (Detailed)</option>
+						<option value="the-matrix">the-matrix</option>
+						<option value="tomorrow-night-bright">tomorrow-night-bright</option>
+						<option value="tomorrow-night-eighties">tomorrow-night-eighties</option>
+						<option value="ttcn">ttcn</option>
+						<option value="twilight">twilight</option>
+						<option value="vibrant-ink">vibrant-ink</option>
+						<option value="xq-dark">xq-dark</option>
+						<option value="xq-light">xq-light</option>
+						<option value="yeti">yeti</option>
+						<option value="zenburn">zenburn</option>
+					</select>
+				</span>
+			</li>
+			<li id="bt-key-bindings" class="button" title="Key bindings"></li>
+			<li id="bt-scriptcase-tools" class="button" title="Editor provided by ScriptCase Tools extension"></li>
+		</ul>
+	</div>
+	<textarea id="new-editor"></textarea>
+</div>
