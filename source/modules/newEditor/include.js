@@ -10,10 +10,22 @@
 	var newEditorPath = browser.extension.getURL("modules/newEditor");
 	
 	var includeNewEditor = function(sctSettings, content){
-		window.appendScript(document, function(sctSettings, editorIdentifier, newEditorPath, content){
+		window.appendScript(document, function(
+			sctSettings, editorIdentifier, newEditorPath, content,
+			isPageStr, findElementStr, getTopWindowStr, getDocumentListStr
+		){
 			if(typeof editor == "undefined"){
 				return;
 			}
+			
+			eval([
+				"var fn = {",
+					"isPage : (" + isPageStr + "),",
+					"getTopWindow : (" + getTopWindowStr + "),",
+					"getDocumentList : (" + getDocumentListStr + "),",
+					"findElement : (" + findElementStr + ")",
+				"};",
+			].join("\n"));
 			
 			// "throttle" technique
 			// used to limit how many times a function can run in an interval
@@ -21,6 +33,15 @@
 			var _throttle = function(id, time, fn){
 				clearTimeout(window.throttleTimeout[id]);
 				window.throttleTimeout[id] = setTimeout(fn, time);
+			};
+			
+			var getEditorIdentifier = function(){
+				if(fn.isPage("app_template.php")){
+					var tplName = fn.findElement(".tpl_name.vista");
+					return tplName ? tplName.id : "";
+				}else{
+					return editorIdentifier;
+				}
 			};
 			
 			var _bindSyncEvent = function(currentEditor, newEditor){
@@ -154,9 +175,9 @@
 								}
 								
 								if(data && data.length){
-									savedEditorState[type][editorIdentifier] = data;
+									savedEditorState[type][getEditorIdentifier()] = data;
 								}else{
-									delete savedEditorState[type][editorIdentifier];
+									delete savedEditorState[type][getEditorIdentifier()];
 								}
 								
 								localStorage.setItem("sctNewEditorState", JSON.stringify(savedEditorState));
@@ -201,6 +222,10 @@
 						}
 					};
 					
+					newEditor.on("loadNewEditorState", function(){
+						_loadNewEditorState(newEditor);
+					});
+					
 					var events = ["editorStateChanged", "sublimeBookmarksChanged", "fold", "unfold"];
 					events.forEach(function(event){
 						newEditor.on(event, function(){
@@ -213,7 +238,7 @@
 			var _loadNewEditorState = function(newEditor){
 				var editorState = JSON.parse(localStorage.getItem("sctNewEditorState") || "{}");
 				
-				var sublimeBookmarks = editorState.sublimeBookmarks && editorState.sublimeBookmarks[editorIdentifier];
+				var sublimeBookmarks = editorState.sublimeBookmarks && editorState.sublimeBookmarks[getEditorIdentifier()];
 				if(sublimeBookmarks && sublimeBookmarks.length){
 					sublimeBookmarks.forEach(function(pos){
 						if(!pos.to){
@@ -231,7 +256,7 @@
 					});
 				}
 				
-				var fold = editorState.fold && editorState.fold[editorIdentifier];
+				var fold = editorState.fold && editorState.fold[getEditorIdentifier()];
 				if(fold && fold.length){
 					fold.forEach(function(pos){
 						newEditor.foldCode(pos.from.line);
@@ -242,7 +267,7 @@
 			var _addEditor = function(){
 				var $frameContainer = $("#id_div_code");
 				
-				if(window.location.href.match(/app_template\.php/i)){
+				if(fn.isPage("app_template.php")){
 					$frameContainer = $("#tab-1");
 				}
 				
@@ -257,10 +282,10 @@
 					if($("#id_precodes").is(":visible")){
 						document.body.style.overflow = "";
 					}else{
-						// app_template.php => menu Layout -> HTML templates
-						// the height of 'HTML templates' page, defined by ScriptCase, is wrong, so
-						// it needs the scrollbar to show a full visible page of code
-						if(!window.location.href.match(/(app_template|button)\.php/i)){
+						// app_template.php => menu Layout -> Templates HTML
+						// the height of 'Templates HTML' page defined by ScriptCase is wrong, so
+						// it requires the scrollbar to show a full visible page of code
+						if(!fn.isPage(["app_template.php", "button.php"])){
 							document.body.style.overflow = "hidden";
 						}
 					}
@@ -280,13 +305,13 @@
 				
 				// z-index can't be too high, otherwise it'll be in front of some
 				// modal boxes (e.g., the modal to create a new template in
-				// HTML Templates)
+				// Templates HTML)
 				editorFrame.style.zIndex = 2000;
 				
-				if(window.location.href.match(/(nm_edit_php_edit|app_template)\.php/i)){
+				if(fn.isPage(["nm_edit_php_edit.php", "app_template.php"])){
 					editorFrame.style.marginTop = "51px";
 					editorFrame.style.paddingBottom = "51px";
-				}else if(window.location.href.match(/(button)\.php/i)){
+				}else if(fn.isPage("button.php")){
 					var tdCode = document.getElementById("id_td_code");
 					var tableTdCode = tdCode.parentElement.parentElement.parentElement; // table > tbody > tr
 					var firstTr = tableTdCode.querySelector("tr");
@@ -298,7 +323,7 @@
 					editorFrame.style.width = $frameContainer.width() + "px";
 				}, 50);
 				
-				if(window.location.href.match(/app_template\.php/i)){
+				if(fn.isPage("app_template.php")){
 					editorFrame.style.marginLeft = "19px";
 					editorFrame.style.paddingBottom = "66px";
 					$frameContainer.append(editorFrame);
@@ -354,7 +379,9 @@
 			
 			
 			_addEditor();
-		}, sctSettings, editorIdentifier, newEditorPath, content);
+		},
+		sctSettings, editorIdentifier, newEditorPath, content,
+		window.isPage, window.findElement, window.getTopWindow, window.getDocumentList);
 	};
 	
 	window.loadSettingsFromBackgroundPage(function(sctSettings){

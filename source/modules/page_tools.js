@@ -101,14 +101,15 @@
 		},
 		
 		getCurrentEditorName : function(){
-			// "templates" = SC7, "html templates" = SC8
-			var templatesTabsName = ["templates", "html templates"];
-			var activeTab = fn.getScActiveTab();
-			var isPageHtmlTemplates = templatesTabsName.indexOf(activeTab.innerText.toLowerCase()) != -1;
-			if(activeTab && isPageHtmlTemplates){
-				var tplName = fn.findElement(".tpl_name.vista");
-				if(tplName && tplName.id){
-					return tplName.id;
+			var activeTab = fn.getScActiveTab() || {};
+			if(activeTab.id == "sys_aba_home"){
+				var nmFrmBotSys = fn.findElement("[name='nmFrmBotSys']");
+				var isTemplateTab = nmFrmBotSys.contentWindow.location.href.indexOf("app_template.php") != -1;
+				if(isTemplateTab){
+					var tplName = fn.findElement(".tpl_name.vista");
+					if(tplName && tplName.id){
+						return tplName.id;
+					}
 				}
 			}
 			
@@ -187,7 +188,8 @@
 				// starts from key 2 because 0=_document and 1=fnCode (and
 				// they're not necessary for the script content)
 				for(var x = 2; x < plainArgs.length; x++){
-					fnArgs.push(plainArgs[x]);
+					var arg = typeof plainArgs[x] == "function" ? plainArgs[x].toString() : plainArgs[x];
+					fnArgs.push(arg);
 				}
 				
 				if(fnArgs.length){
@@ -287,7 +289,7 @@
 			// the cursor/scroll is loaded
 			if(fn.isPage("devel/iface/main.php")){
 				fn.appendScript(document, function(){
-					if(!ajax_set_show_app){
+					if(typeof ajax_set_show_app != "function"){
 						return;
 					}
 					
@@ -305,13 +307,13 @@
 			}
 			
 			// change ScriptCase's native updatePreview, so when a
-			// lib (Templates/HTML Templates) is loaded (or updatePreview is called),
+			// lib (Templates/Templates HTML) is loaded (or updatePreview is called),
 			// the cursor/scroll is loaded
 			if(fn.isPage("devel/iface/app_template.php")){
 				var simulateSc8 = document.querySelector(".tpl_name.vista") === null;
 				
 				fn.appendScript(document, function(simulateSc8){
-					if(!updatePreview){
+					if(typeof updatePreview != "function"){
 						return;
 					}
 					
@@ -322,6 +324,13 @@
 							if(simulateSc8){
 								$(".tpl_name.vista").removeClass("tpl_name vista");
 								$("#" + window.template_now).addClass("tpl_name vista");
+							}
+							
+							if($("#newEditorFrame").length){
+								var newEditor = $("#newEditorFrame").get(0).contentWindow.newEditor;
+								if(newEditor){
+									newEditor.getCodeMirrorPlugin().signal(newEditor, "loadNewEditorState");
+								}
 							}
 							
 							var result = _original_updatePreview();
@@ -782,7 +791,8 @@
 			}
 			
 			if(typeof page == "string"){
-				return window.location.href.indexOf(page) != -1;
+				var currentUrl = window.location.href;
+				return currentUrl.toLowerCase().indexOf(page.toLowerCase()) != -1;
 			}
 			
 			return false;
@@ -796,5 +806,9 @@
 	};
 	
 	fn.init();
-	fn.exportFn(["appendScript", "loadSettingsFromBackgroundPage", "findElement", "getEditorIdentifier"]);
+	fn.exportFn([
+		"appendScript", "loadSettingsFromBackgroundPage",
+		"isPage", "findElement", "getEditorIdentifier",
+		"getTopWindow", "getDocumentList"
+	]);
 })();
