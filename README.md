@@ -61,7 +61,7 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 * New feedback form in the popup/settings box
 
 ### v1.0.0
-* 'Internal libraries' and 'HTML Templates' also restore last cursor and scroll position
+* 'Internal libraries' and 'Templates HTML' also restore last cursor and scroll position
 * New option to always restore last settings used to deploy
 * New option to switch ScriptCase's default code editor to a newer and more complete version of CodeMirror:
 	* Sublime Text-based shortcut keys (e.g., jump to line, selext next/all occurrences, duplicate line, etc)
