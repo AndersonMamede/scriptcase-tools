@@ -55,6 +55,9 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ## Features
 
+### v1.1.3
+* Test only (FF release)
+
 ### v1.1.2
 * Test only (FF release)
 
