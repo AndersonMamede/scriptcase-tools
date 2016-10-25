@@ -2,7 +2,7 @@
 <RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 	<RDF:Description about="urn:mozilla:extension:sct@andersonmamede.com.br">
-		<updates>
+		<em:updates>
 			<RDF:Seq>
 				<RDF:li>
 					<RDF:Description>
@@ -19,6 +19,6 @@
 					</RDF:Description>
 				</RDF:li>
 			</RDF:Seq>
-		</updates>
+		</em:updates>
 	</RDF:Description>
 </RDF:RDF>
