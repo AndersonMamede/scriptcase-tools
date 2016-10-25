@@ -6,7 +6,7 @@
   <!-- This Description resource includes all the update and compatibility information for
        a single add-on with the id foobar@developer.mozilla.org. You can list multiple
        add-ons information in the same RDF file. -->
-  <RDF:Description about="urn:mozilla:extension:foobar@developer.mozilla.org">
+  <RDF:Description about="urn:mozilla:extension:sct@andersonmamede.com.br">
     <em:updates>
       <RDF:Seq>
 
