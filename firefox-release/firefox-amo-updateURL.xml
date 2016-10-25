@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+	<RDF:Description about="urn:mozilla:extension:sct@andersonmamede.com.br">
+		<em:updates>
+			<RDF:Seq>
+				<RDF:li>
+					<RDF:Description>
+						<em:version>1.1.2</em:version>
+						<em:targetApplication>
+							<RDF:Description>
+								<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+								<em:minVersion>20</em:minVersion>
+								<em:maxVersion>*</em:maxVersion>
+								<em:updateLink>https://github.com/AndersonMamede/scriptcase-tools/raw/master/firefox-release/scriptcase_tools-1.1.2.xpi</em:updateLink>
+								<em:updateInfoURL>https://github.com/AndersonMamede/scriptcase-tools#features</em:updateInfoURL>
+							</RDF:Description>
+						</em:targetApplication>
+					</RDF:Description>
+				</RDF:li>
+			</RDF:Seq>
+		</em:updates>
+	</RDF:Description>
+</RDF:RDF>
