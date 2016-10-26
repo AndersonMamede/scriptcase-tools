@@ -11,7 +11,7 @@ A browser extension to make working with ScriptCase simpler and more productive.
 
 ## Installation
 
-### [> Google Chrome](#install-chrome)
+### Google Chrome {#install-google-chrome}
 
 #### Quick Installation
 
