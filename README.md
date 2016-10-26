@@ -11,15 +11,37 @@ A browser extension to make working with ScriptCase simpler and more productive.
 
 ## Installation
 
-### Quick Installation
-Go to [Chrome Web Store](https://goo.gl/i4LtVl) to install the release version.
+### Google Chrome
 
-### Manual Installation (latest/development version)
-1. Download this source code (https://github.com/AndersonMamede/scriptcase-tools)
+#### Quick Installation
+
+Go to [Chrome Web Store](https://chrome.google.com/webstore/detail/scriptcase-tools/mfokofbgiajojbgginjeglebmpejnpdm) to install the release version.
+
+#### Manual Installation (latest/development version)
+
+1. Download the source code at https://github.com/AndersonMamede/scriptcase-tools
 2. Unzip the file
 3. Navigate to **chrome://extensions**
 4. Ensure the checkbox labeled **Developer mode** is enabled
 5. Click "**Load unpacked extension...**" and select the "**source**" folder inside the (unzipped) folder
+
+### Firefox
+
+[Review, signing, and distributing policies](https://developer.mozilla.org/en-US/Add-ons/Distribution) are different at [Firefox's "webstore" (AMO)](https://addons.mozilla.org). All extensions are manually reviewed by employers (or some volunteers), thus making the publishing process extremely slow: everytime an extension is submitted, whether the very first or a new version, it goes to the end of the reviewing queue.
+
+It took 19 days to receive a response for the first publishing attempt:
+"Does this add-on only work with paid software?
+In this case, we need to ask you to switch your add-on to 'unlisted' (=selfhosted) as the add-on requires a payment for it to be useful.
+For more information, see:
+https://developer.mozilla.org/en-US/Add-ons/AMO/Policy/Reviews - 'Require payment to use core add-on features (upfront or after trial)'"
+
+That means an extension can't be published (listed) in Firefox's "webstore" if it works together with a paid software, and although the add-on is digitally signed by Firefox's webstore, the file must be hosted by the owner/author. And because ScriptCase Tools is an extension intented to be used with ScriptCase, which is a paid software, it was not accepted as a listed add-on.
+
+That is why there's not an official link in Firefox's webstore for ScriptCase Tools and it must be manually downloaded, which is very simple:
+
+1) Download the [installation file here](https://github.com/AndersonMamede/scriptcase-tools/raw/master/firefox-release/scriptcase_tools-1.2.0.xpi)
+2) Drag it into Firefox window
+3) Wait for the confirmation popup and then click on the "Install" button
 
 ## ScriptCase Support
 * ScriptCase v7
