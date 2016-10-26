@@ -11,7 +11,7 @@ A browser extension to make working with ScriptCase simpler and more productive.
 
 ## Installation
 
-### <span id="abc">Google Chrome</span>
+## > Google Chrome Installation
 
 #### Quick Installation
 
@@ -25,7 +25,7 @@ Go to [Chrome Web Store](https://chrome.google.com/webstore/detail/scriptcase-to
 4. Ensure the checkbox labeled **Developer mode** is enabled
 5. Click "**Load unpacked extension...**" and select the "**source**" folder inside the (unzipped) folder
 
-### [> Firefox](#install-firefox)
+## > Firefox
 
 [Review, signing, and distributing policies](https://developer.mozilla.org/en-US/Add-ons/Distribution) are different at [Firefox's "webstore" (AMO)](https://addons.mozilla.org). All extensions are manually reviewed by employers (or some volunteers), thus making the publishing process extremely slow: everytime an extension is submitted, whether the very first or a new version, it goes to the end of the reviewing queue.
 
