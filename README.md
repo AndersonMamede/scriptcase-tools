@@ -1,8 +1,8 @@
-[![ScriptCase - v7 v8](https://img.shields.io/badge/scriptcase-v7%20%7C%20v8-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools/)
-[![Chrome WebStore](https://img.shields.io/badge/platform-Chrome-brightgreen.svg)](https://chrome.google.com/webstore/detail/scriptcase-tools/mfokofbgiajojbgginjeglebmpejnpdm?utm_source=chrome-app-launcher-info-dialog)
-[![Firefox](https://img.shields.io/badge/platform-Firefox%20(coming%20in%20next%20release)-lightgrey.svg)](https://github.com/AndersonMamede/scriptcase-tools/)
-[![Dependencies](https://img.shields.io/badge/dependencies-none-orange.svg)](https://github.com/AndersonMamede/scriptcase-tools/)
-[![License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://github.com/AndersonMamede/scriptcase-tools/blob/master/LICENSE)
+[![ScriptCase - v7 v8](https://img.shields.io/badge/scriptcase-v7%20%7C%20v8-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools/){:target="_blank"}
+[![Chrome WebStore](https://img.shields.io/badge/platform-Chrome-brightgreen.svg)](https://chrome.google.com/webstore/detail/scriptcase-tools/mfokofbgiajojbgginjeglebmpejnpdm?utm_source=chrome-app-launcher-info-dialog){:target="_blank"}
+[![Firefox](https://img.shields.io/badge/platform-Firefox%20(coming%20in%20next%20release)-lightgrey.svg)](https://github.com/AndersonMamede/scriptcase-tools/){:target="_blank"}
+[![Dependencies](https://img.shields.io/badge/dependencies-none-orange.svg)](https://github.com/AndersonMamede/scriptcase-tools/){:target="_blank"}
+[![License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://github.com/AndersonMamede/scriptcase-tools/blob/master/LICENSE){:target="_blank"}
 
 # ScriptCase Tools
 A browser extension to make working with ScriptCase simpler and more productive.
@@ -14,7 +14,7 @@ A browser extension to make working with ScriptCase simpler and more productive.
 ### Google Chrome
 
 #### Quick Installation
-Go to [Chrome Web Store](https://chrome.google.com/webstore/detail/scriptcase-tools/mfokofbgiajojbgginjeglebmpejnpdm) to install the release version.
+Go to [Chrome Web Store](https://chrome.google.com/webstore/detail/scriptcase-tools/mfokofbgiajojbgginjeglebmpejnpdm){:target="_blank"} to install the release version.
 
 #### Manual Installation (latest/development version)
 1. Download the source code at https://github.com/AndersonMamede/scriptcase-tools
@@ -24,19 +24,20 @@ Go to [Chrome Web Store](https://chrome.google.com/webstore/detail/scriptcase-to
 5. Click "**Load unpacked extension...**" and select the "**source**" folder inside the (unzipped) folder
 
 ### Firefox
-[Review, signing, and distributing policies](https://developer.mozilla.org/en-US/Add-ons/Distribution) are different at [Firefox's "webstore" (AMO)](https://addons.mozilla.org). All extensions are manually reviewed by employers (or some volunteers), thus making the publishing process extremely slow: everytime an extension is submitted, whether the very first or a new version, it goes to the end of the reviewing queue.
+[Review, signing, and distributing policies](https://developer.mozilla.org/en-US/Add-ons/Distribution){:target="_blank"} are different at [Firefox's "webstore" (AMO)](https://addons.mozilla.org){:target="_blank"}. All extensions are manually reviewed by employers (or some volunteers), thus making the publishing process extremely slow: everytime an extension is submitted, whether the very first or a new version, it goes to the end of the reviewing queue.
 
 It took **19 days** to receive a response for the first publishing attempt:
-"Does this add-on only work with paid software?
-In this case, we need to ask you to switch your add-on to 'unlisted' (=selfhosted) as the add-on requires a payment for it to be useful.
-For more information, see:
+<br>
+"Does this add-on only work with paid software?<br>
+In this case, we need to ask you to switch your add-on to 'unlisted' (=selfhosted) as the add-on requires a payment for it to be useful.<br>
+For more information, see:<br>
 https://developer.mozilla.org/en-US/Add-ons/AMO/Policy/Reviews - 'Require payment to use core add-on features (upfront or after trial)'"
 
 That means **an extension can't be published (listed) in Firefox's "webstore" if it works together with a paid software, and although the add-on is digitally signed by Firefox's webstore, the file must be hosted by the owner/author**. And because ScriptCase Tools is an extension intented to be used with ScriptCase, which is a paid software, it was not accepted as a listed add-on.
 
 That is why there's not an official link in Firefox's webstore for ScriptCase Tools and it must be **manually downloaded, which is very simple**:
 
-1. Download the [installation file here](https://github.com/AndersonMamede/scriptcase-tools/raw/master/firefox-release/scriptcase_tools-1.2.0.xpi)
+1. Download the installation file at https://github.com/AndersonMamede/scriptcase-tools/raw/master/firefox-release/scriptcase_tools-1.2.0.xpi
 2. Drag it into Firefox window
 3. Wait for the confirmation popup and then click on the "Install" button
 
@@ -46,7 +47,7 @@ That is why there's not an official link in Firefox's webstore for ScriptCase To
 
 Other ScriptCase versions might work correctly, but were not tested.
 
-Any problem with ScriptCase Tools in the above Scriptcases environment should be reported as a bug in our [issue tracker](https://github.com/AndersonMamede/scriptcase-tools/issues) or as a message to [mamede.anderson@gmail.com](mailto:mamede.anderson@gmail.com).
+Any problem with ScriptCase Tools in the above Scriptcases environment should be reported as a bug in our [issue tracker](https://github.com/AndersonMamede/scriptcase-tools/issues){:target="_blank"} or as a message to [mamede.anderson@gmail.com](mailto:mamede.anderson@gmail.com){:target="_blank"}.
 
 ## Why was ScriptCase Tools built?
 If you often use ScriptCase to develop your applications, you've probably noticed that its development environment lacks some basic functionalities (e.g., no shortcut keys, not restoring last cursor position), while others could be improved (e.g., code editor, main menu sensitivity).
@@ -59,13 +60,13 @@ This browser extension was created to fulfill these gaps.
 Because ScriptCase doesn't provide a public API, hacking into its JavaScript/HTML/CSS code was the (only) way to go. And because of that, this extension heavily depends on ScriptCase's code and structure (e.g., specifics JavaScript functions, the DOM structure, some elements with specific ID/class name).
 
 ## Authors
-* [Anderson Mamede](https://github.com/AndersonMamede)
+* [Anderson Mamede](https://github.com/AndersonMamede){:target="_blank"}
 
 ## Contributing
 * Fork this repository
-* Submit [bug reports, ideas or new features](https://github.com/AndersonMamede/scriptcase-tools/issues)<br><br>
+* Submit [bug reports, ideas or new features](https://github.com/AndersonMamede/scriptcase-tools/issues){:target="_blank"}<br><br>
 
-If you are working on a new feature, please [create an issue](https://github.com/AndersonMamede/scriptcase-tools/issues) for the feature you’re working on so that we can all avoid duplicating effort. When your new feature (or fix) is ready, submit a pull request and/or attach a patch to your issue.
+If you are working on a new feature, please [create an issue](https://github.com/AndersonMamede/scriptcase-tools/issues){:target="_blank"} for the feature you’re working on so that we can all avoid duplicating effort. When your new feature (or fix) is ready, submit a pull request and/or attach a patch to your issue.
 
 ## Legal and License
 This project is not affiliated with, sponsored by, or endorsed by Netmake Soluções em Informática.
