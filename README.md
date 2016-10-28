@@ -77,6 +77,7 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ### v1.2.1
 * Add email field in feedback form
+* Install Id and Uninstall survey
 
 ### v1.2.0
 * Release for Firefox
