@@ -82,7 +82,7 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 * Add email field in feedback form
 
 ### v1.2.0
-* Firefox release
+* Release for Firefox
 
 ### v1.1.1
 * Fix a problem that caused the new editor in "Templates HTML" page (app_template.php) not restore sublime marks/fold/cursor when navigating through the left menu (templates)
