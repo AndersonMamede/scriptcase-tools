@@ -37,7 +37,7 @@ That means **an extension can't be published (listed) in Firefox's "webstore" if
 
 That is why there's not an official link in Firefox's webstore for ScriptCase Tools and it must be **manually downloaded, which is very simple**:
 
-1. Download the compiled and signed file at https://github.com/AndersonMamede/scriptcase-tools/raw/master/firefox-release/scriptcase_tools-1.2.0.xpi
+1. Download the compiled and signed file at https://github.com/AndersonMamede/scriptcase-tools/raw/master/firefox-release/scriptcase_tools-1.2.1.xpi
 2. Drag it into Firefox window
 3. Wait for the confirmation popup and then click on the "Install" button
 
