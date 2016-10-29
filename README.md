@@ -75,6 +75,9 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ## Features
 
+### v1.3.1
+* Fix: users reported that the editor was not visible in some versions of Firefox. The error was caused by the code NodeList.forEach because this function doesn't exist in some releases of Firefox
+
 ### v1.3.0
 * Install Id and Uninstall survey
 
