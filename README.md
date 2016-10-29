@@ -7,7 +7,7 @@
 # ScriptCase Tools
 A browser extension to make working with ScriptCase simpler and more productive.
 
-<p align="center"><img src="scriptcase_tools.png" title="ScriptCase Tools" alt="ScriptCase Tools"></p>
+<p align="center"><img src="scriptcase_tools.png" title="ScriptCase Tools" alt="ScriptCase Tools" width="476" height="557"></p>
 
 ## Installation
 
