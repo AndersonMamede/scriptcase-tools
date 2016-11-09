@@ -75,6 +75,9 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ## Features
 
+### v1.3.3
+* Change how the Install Id is synchronized with Firebase
+
 ### v1.3.2
 * Fix a problem that caused the field to select the event 'OnRecord/OnFinish' to be hidden when editing a 'Run' button
 * Change alert messages to use the modal module
