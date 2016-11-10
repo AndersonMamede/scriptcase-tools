@@ -1,7 +1,7 @@
 {
 	"manifest_version" : 2,
 	
-	"version" : "1.1.1",
+	"version" : "1.3.4",
 	"name" : "ScriptCase Tools",
 	"short_name" : "SCT",
 	"description" : "A browser extension to make working with ScriptCase simpler and more productive",
@@ -130,5 +130,12 @@
 	
 	"permissions" : [
 		"tabs", "http://*/", "https://*/"
-	]
+	],
+	
+	"applications" : {
+		"gecko": {
+			"id": "sct@andersonmamede.com.br",
+			"update_url" : "https://raw.githubusercontent.com/AndersonMamede/scriptcase-tools/master/firefox-release/firefox-amo-updateURL.xml"
+		}
+	}
 }

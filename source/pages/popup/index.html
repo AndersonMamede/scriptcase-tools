@@ -6,17 +6,8 @@
 		<link href="popup.css" rel="stylesheet">
 	</head>
 	<body>
-		<div id="modal">
-			<div id="modal-body">
-				<div id="modal-title">&nbsp;</div>
-				<div id="modal-content"></div>
-				<div id="modal-toolbar">
-					<button id="bt-modal-ok" class="button">OK</button>
-				</div>
-			</div>
-		</div>
 		<div id="popup-title">
-			ScriptCase Tools v1.1.0
+			ScriptCase Tools v1.3.4
 			<img src="/assets/img/message.svg" id="send-message" class="blink" title="Click to send us message (feedback, suggestions, report bugs, etc)">
 		</div>
 		<div id="form-field">
@@ -106,8 +97,9 @@
 				implemented is to tell us about them!<br><br>
 				Alternatively, you can contact us through the
 				<a href="https://github.com/AndersonMamede/scriptcase-tools" target="_blank">official repository at GitHub</a>.<br><br>
-				<div id="feedback-note">* If a reply is required, please include an e-mail address.</div>
-				<textarea id="feedback-message" cols="1" rows="1" autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
+				<div id="feedback-note">* Your email address will be used only for reply</div>
+				<input id="feedback-email" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Email address"><br>
+				<textarea id="feedback-message" cols="1" rows="1" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Message"></textarea>
 			</div>
 		</div>
 		<script src="/assets/jquery.js"></script>
