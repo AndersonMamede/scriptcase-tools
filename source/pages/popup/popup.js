@@ -115,11 +115,11 @@ $(document).ready(function(){
 				
 				if(isNaN(preventSessionTimeoutMinutes)){
 					$field.val(15);
-					invalidFields.push("Invalid configuration for session timeout ping. Value must be a number between 5 and 999 (minutes).");
+					invalidFields.push("Invalid configuration for session timeout ping. Value must be a number between 5 and 999 (minutes)");
 				}else if(preventSessionTimeoutMinutes < 5){
-					invalidFields.push("Invalid configuration for session timeout ping. Value must be equal or greater than 5 (minutes).");
+					invalidFields.push("Invalid configuration for session timeout ping. Value must be equal or greater than 5 (minutes)");
 				}else if(preventSessionTimeoutMinutes > 999){
-					invalidFields.push("Invalid configuration for session timeout ping. Value must be equal or less than 999 (minutes).");
+					invalidFields.push("Invalid configuration for session timeout ping. Value must be equal or less than 999 (minutes)");
 				}
 			})();
 			
@@ -148,17 +148,20 @@ $(document).ready(function(){
 				var invalidShortcutKeysMsg = [];
 				for(var key in requestedShortcutKeys){
 					if(key && availableShortcutKeys.indexOf(key) == -1){
-						invalidShortcutKeysMsg.push("     * " + key + " -> " + requestedShortcutKeys[key]);
+						invalidShortcutKeysMsg.push("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* " + key + " -> " + requestedShortcutKeys[key]);
 					}
 				}
 				
 				if(invalidShortcutKeysMsg.length){
-					invalidFields.push("Invalid shortcuts keys:\n" + invalidShortcutKeysMsg.join("\n"));
+					invalidFields.push("Invalid shortcuts keys:<br>" + invalidShortcutKeysMsg.join("<br>"));
 				}
 			})();
 			
 			if(invalidFields.length){
-				alert("Invalid field(s):\n\n- " + invalidFields.join(";\n- ") + ";");
+				Modal.show("invalid_fields", {
+					title : "Invalid field(s)",
+					content : "- " + invalidFields.join(";<br>- ") + ";"
+				});
 				return false;
 			}
 			
@@ -167,14 +170,14 @@ $(document).ready(function(){
 		
 		bindEvents : function(){
 			$(".info").click(function(){
-				window.Modal.show({
+				window.Modal.show("info", {
 					title : "Info",
 					content : infoContent[this.getAttribute("data-info")]
 				});
 			});
 			
 			$("#send-message").click(function(){
-				window.Modal.show({
+				window.Modal.show("feedback", {
 					title : "Let us know what you think",
 					content : $("#feedback-container").html(),
 					defaultButtonText : "Cancel",
@@ -183,14 +186,27 @@ $(document).ready(function(){
 						"Send message" : function(){
 							var $button = $(this).blur();
 							var message = $.trim($("#feedback-message").val());
+							var email = $.trim($("#feedback-email").val());
 							
 							if($button.hasClass("busy")){
 								return false;
 							}
 							
+							if(!email.length){
+								Modal.show("invalid_fields", {
+									title : "Invalid field(s)",
+									content : "You must inform your email address!",
+									textAlign : "center"
+								});
+								return false;
+							}
+							
 							if(!message.length){
-								alert("You must type a message to send!");
-								$("#feedback-message").focus();
+								Modal.show("invalid_fields", {
+									title : "Invalid field(s)",
+									content : "You must type a message to send!",
+									textAlign : "center"
+								});
 								return false;
 							}
 							
@@ -200,6 +216,7 @@ $(document).ready(function(){
 									language : window.navigator.language,
 									date : {".sv" : "timestamp"},
 									sctVersion : settings.currentVersion,
+									email : email,
 									message : message
 								};
 								
@@ -216,14 +233,22 @@ $(document).ready(function(){
 										}
 										
 										return fn.releaseButton($button, "fail", function(){
-											alert(errorMessage);
+											Modal.show("fail", {
+												content : errorMessage
+											});
 										});
 									}
 									
 									return fn.releaseButton($button, "done", function(){
-										window.Modal.close();
+										window.Modal.close("feedback");
 										setTimeout(function(){
-											alert("We appreciate your feedback and we'll use it to create a better tool.\nThank you!");
+											Modal.show("feedback_sent", {
+												title : "Thank you!",
+												content : [
+													"We appreciate your feedback and we'll use it to create a better tool.<br>",
+													"Thank you!"
+												].join("")
+											});
 										}, 100);
 									});
 								});
@@ -237,7 +262,7 @@ $(document).ready(function(){
 					}
 				});
 				
-				$("#feedback-message").focus();
+				$("#feedback-email").focus();
 			});
 			
 			$("#form-field").on("click", "#save-settings:not(.busy)", function(){
@@ -255,7 +280,10 @@ $(document).ready(function(){
 					newSettings : newSettings
 				}, function(){
 					fn.releaseButton($button, "done", function(){
-						alert("Reload ScriptCase to apply the changes.");
+						Modal.show("settings_saved", {
+							content : "Reload ScriptCase to apply the changes.",
+							textAlign : "center"
+						});
 					});
 				});
 			});

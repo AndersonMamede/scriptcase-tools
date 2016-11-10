@@ -1,45 +1,81 @@
 "use strict";
 
 window.Modal = new (function(){
-	var elements = {
-		$modal : $("#modal"),
-		$modalTitle : $("#modal-title"),
-		$modalContent : $("#modal-content"),
-		$modalToolbar : $("#modal-toolbar"),
-		$defaultButton : $("#bt-modal-ok")
-	};
-	
-	elements.$defaultButton.click(function(){
-		fn.close();
-	});
+	var modalData = {};
 	
 	var fn = {
-		reset : function(){
-			elements.$modalTitle.html("");
-			elements.$modalContent.html("");
-			elements.$defaultButton.prop("class", "button").text("OK");
-			elements.$modalToolbar.find(".extraButton").remove();
+		prepare : function(modalId, options){
+			if(typeof modalData[modalId] != "undefined" && modalData[modalId]){
+				return;
+			}
+			
+			modalData[modalId] = {
+				modalId : modalId,
+				options : options,
+				$elements : {}
+			};
+			
+			var zIndex = fn.getNextZIndex();
+			
+			modalData[modalId].$elements.modal = $('<div class="modal"></div>').css("z-index", zIndex);
+			modalData[modalId].$elements.modalBody = $('<div class="modal-body"></div>').css("z-index", zIndex);
+			modalData[modalId].$elements.modalTitle = $('<div class="modal-title"></div>');
+			modalData[modalId].$elements.modalContent = $('<div class="modal-content"></div>');
+			modalData[modalId].$elements.modalToolbar = $('<div class="modal-toolbar"></div>');
+			modalData[modalId].$elements.defaultButton = $('<button class="bt-modal-ok button">OK</button>');
+			
+			modalData[modalId].$elements.modal.prependTo($("body"));
+			modalData[modalId].$elements.modalBody.appendTo(modalData[modalId].$elements.modal);
+			modalData[modalId].$elements.modalTitle.appendTo(modalData[modalId].$elements.modalBody);
+			modalData[modalId].$elements.modalContent.appendTo(modalData[modalId].$elements.modalBody);
+			modalData[modalId].$elements.modalToolbar.appendTo(modalData[modalId].$elements.modalBody);
+			modalData[modalId].$elements.defaultButton.appendTo(modalData[modalId].$elements.modalToolbar);
+			
+			modalData[modalId].$elements.defaultButton.click(function(){
+				fn.close(modalId);
+			});
 		},
 		
-		close : function(){
-			elements.$modal.removeClass("active");
-			fn.reset();
+		getNextZIndex : function(){
+			return Object.keys(modalData).length + 1;
 		},
 		
-		show : function(options){
-			fn.reset();
+		show : function(modalId, options){
+			fn.reset(modalId);
+			fn.prepare(modalId, options);
 			
-			options.title && elements.$modalTitle.html(options.title);
-			options.content && elements.$modalContent.html(options.content);
-			options.defaultButtonClass && elements.$defaultButton.addClass(options.defaultButtonClass);
-			options.defaultButtonText && elements.$defaultButton.text(options.defaultButtonText);
+			if(options.title){
+				modalData[modalId].$elements.modalTitle.html(options.title);
+			}
 			
-			fn.parseExtraButtons(options.extraButton);
+			if(options.content){
+				modalData[modalId].$elements.modalContent.html(options.content);
+			}
 			
-			elements.$modal.addClass("active");
+			if(options.textAlign){
+				modalData[modalId].$elements.modalContent.css("text-align", options.textAlign);
+			}
+			
+			if(options.defaultButtonClass){
+				modalData[modalId].$elements.defaultButton.addClass(options.defaultButtonClass)
+			}
+			
+			if(options.defaultButtonText){
+				modalData[modalId].$elements.defaultButton.text(options.defaultButtonText);
+			}
+			
+			fn.parseExtraButtons(modalId, options.extraButton);
+			
+			modalData[modalId].$elements.modal.addClass("active");
+			
+			fn.center(modalId);
+			
+			if(modalData[modalId].$elements.defaultButton && modalData[modalId].$elements.defaultButton.is(":visible")){
+				modalData[modalId].$elements.defaultButton.focus();
+			}
 		},
 		
-		parseExtraButtons : function(extraButton){
+		parseExtraButtons : function(modalId, extraButton){
 			if(!$.isPlainObject(extraButton)){
 				return;
 			}
@@ -47,10 +83,40 @@ window.Modal = new (function(){
 			for(var text in extraButton){
 				var callback = extraButton[text];
 				var $button = $("<button class='button extraButton'>" + text + "</button>").click(callback);
-				elements.$modalToolbar.prepend($button);
+				modalData[modalId].$elements.modalToolbar.prepend($button);
 			}
+		},
+		
+		center : function(modalId){
+			var topPosition = ($("body").outerHeight() - modalData[modalId].$elements.modalBody.outerHeight()) / 2
+			var fixedMargin = 10;
+			modalData[modalId].$elements.modalBody.css("margin-top", topPosition - fixedMargin);
+		},
+		
+		close : function(modalId){
+			if(typeof modalData[modalId] == "undefined" || !modalData[modalId]){
+				return;
+			}
+			
+			modalData[modalId].$elements.modal.removeClass("active").remove();
+			delete modalData[modalId];
+			fn.reset();
+		},
+		
+		reset : function(modalId){
+			if(typeof modalData[modalId] == "undefined" || !modalData[modalId]){
+				return;
+			}
+			
+			modalData[modalId].$elements.modalTitle.html("");
+			modalData[modalId].$elements.modalContent.html("");
+			modalData[modalId].$elements.defaultButton.prop("class", "button").text("OK");
+			modalData[modalId].$elements.modalToolbar.find(".extraButton").remove();
 		}
 	};
 	
-	return fn;
+	return {
+		show : fn.show,
+		close : fn.close
+	};
 });
