@@ -54,7 +54,7 @@
 	#toolbar li{
 		display: inline-block;
 		margin-top: 4px;
-		width: 16px;
+		min-width: 16px;
 		height: 16px;
 		vertical-align: middle;
 		background-repeat: no-repeat;
@@ -67,6 +67,9 @@
 	}
 	#toolbar .button{
 		cursor: pointer;
+	}
+	#toolbar #field-id_run_change{
+		margin-top: 0;
 	}
 	#toolbar #bt-attributes{
 		background-image: url("__NEW_EDITOR_PATH__/img/attributes.png");
@@ -180,6 +183,9 @@
 <div id="container">
 	<div id="toolbar">
 		<ul>
+			<li id="field-id_run_change" class="display-none" title="">
+				<select id="id_run_change"></select>
+			</li>
 			<li id="bt-attributes" class="button display-none" title=""></li>
 			<li id="bt-fullscreen" class="button" title="Fullscreen"></li>
 			<li id="bt-search" class="button" title="Search"></li>

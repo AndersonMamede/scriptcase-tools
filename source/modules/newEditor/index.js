@@ -115,6 +115,33 @@
 	
 	function bindEvents(){
 		(function(){
+			var $fieldRunChangeOriginal = window.parent.$(".toolbar_editor #id_run_change");
+			var $fieldRunChange = window.$("#id_run_change");
+			
+			if(!$fieldRunChangeOriginal.length){
+				return;
+			}
+			
+			var syncFieldRunChange = true;
+			
+			$fieldRunChange
+				.html($fieldRunChangeOriginal.html())
+				.val($fieldRunChangeOriginal.val())
+				.change(function(){
+					syncFieldRunChange = false;
+					$fieldRunChangeOriginal.val(this.value).trigger("change");
+					syncFieldRunChange = true;
+				})
+				.parent().removeClass("display-none");
+			
+			$fieldRunChangeOriginal.change(function(){
+				if(syncFieldRunChange){
+					$fieldRunChange.val(this.value);
+				}
+			});
+		})();
+		
+		(function(){
 			var $btAttributesOriginal = window.parent.$(".toolbar_editor [onclick='nm_event_new_param()']");
 			var $btAttributes = $("#bt-attributes");
 			

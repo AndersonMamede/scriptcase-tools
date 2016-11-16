@@ -76,6 +76,22 @@
 			return fn.findElement(".nmAbaAppOn");
 		},
 		
+		getScActiveIframe : function(){
+			var activeIframe = null;
+			
+			var container = fn.findElement("#div_frm_bot_sys").parentElement;
+			var iframeContainers = container.querySelectorAll("#div_frm_bot_sys, [id^='div_frm_bot_app']");
+			
+			for(var x = 0; x < iframeContainers.length; x++){
+				var iframeContainer = iframeContainers[x];
+				if(iframeContainer.style.display == "block" || iframeContainer.style.display == ""){
+					activeIframe = iframeContainer.querySelector("iframe");
+				}
+			}
+			
+			return activeIframe;
+		},
+		
 		getScActiveTabName : function(){
 			var activeTab = fn.getScActiveTab();
 			var element = activeTab && activeTab.querySelector(".nmAbaAppText,.nmAbaAppTextNoClose");
@@ -102,6 +118,9 @@
 		
 		getCurrentEditorName : function(){
 			var activeTab = fn.getScActiveTab() || {};
+			var activeIframe = fn.getScActiveIframe();
+			var activeIframeInnerDocuments = fn.getDocumentList(activeIframe.contentWindow);
+			
 			if(activeTab.id == "sys_aba_home"){
 				var nmFrmBotSys = fn.findElement("[name='nmFrmBotSys']");
 				var isTemplateTab = nmFrmBotSys.contentWindow.location.href.indexOf("app_template.php") != -1;
@@ -113,14 +132,14 @@
 				}
 			}
 			
-			var fieldEventNome = document.querySelector("[name='event_nome']");
-			if(fieldEventNome && fieldEventNome.value){
-				return fieldEventNome.value;
-			}
-			
-			var fieldEventTitle = document.querySelector("[name='event_title']");
+			var fieldEventTitle = fn.findElement("[name='event_title']", true, activeIframeInnerDocuments);
 			if(fieldEventTitle && fieldEventTitle.value){
 				return fieldEventTitle.value;
+			}
+			
+			var fieldEventNome = fn.findElement("[name='event_nome']", true, activeIframeInnerDocuments);
+			if(fieldEventNome && fieldEventNome.value){
+				return fieldEventNome.value;
 			}
 			
 			// custom button
@@ -132,10 +151,16 @@
 			}
 			
 			// internal libraries
-			if(fn.isPage("devel/compat/nm_edit_php_edit.php")){
-				var libType = (document.querySelector("form[name='nm_form_edit_php_list'] input[name='field_file']")||{}).value || "";
-				var file = (document.querySelector("form[name='nm_form'] input[name='field_file']")||{}).value || "";
-				return libType + "-" + file;
+			if(activeIframe.src.indexOf("devel/compat/nm_edit_php.php")){
+				var libType = fn.findElement(
+					"form[name='nm_form_edit_php_list'] input[name='field_file']", true,
+					activeIframeInnerDocuments
+				);
+				var file = fn.findElement(
+					"form[name='nm_form'] input[name='field_file']", true,
+					activeIframeInnerDocuments
+				);
+				return (libType && libType.value || "") + "-" + (file && file.value || "");
 			}
 			
 			var visibleFrmBot = fn.getVisibleFrmBot();
@@ -368,7 +393,7 @@
 					}
 					
 					// js "throttle" technique
-					// used to limit how many times the save message can be send in an interval
+					// used to limit how many times the save message can be send in an time
 					if(window.sendSaveCursorPositionMessageTimeout){
 						clearTimeout(window.sendSaveCursorPositionMessageTimeout);
 						window.sendSaveCursorPositionMessageTimeout = null;
@@ -377,7 +402,7 @@
 				};
 			});
 			
-			// ps: 'sctEditorCursorPosition' was added in window because
+			// sctEditorCursorPosition was added in window because
 			// it's also used by background.js
 			window.sctEditorCursorPosition = {
 				// make a request to save cursor position (communication made
@@ -453,7 +478,7 @@
 							}
 							
 							currentLoop++;
-						}, 50);
+						}, 30);
 					}, (editorConfig && identifier !== null) ? editorConfig[identifier] : {}, identifier);
 				}
 			};
@@ -468,10 +493,6 @@
 			if(!editorContainer || !editorTextarea){
 				return;
 			}
-			
-			window.onbeforeunload = function(){
-				window.sctEditorCursorPosition.requestSave();
-			};
 			
 			editorTextarea.addEventListener("requestSaveCursor", function(){
 				window.sctEditorCursorPosition.requestSave();

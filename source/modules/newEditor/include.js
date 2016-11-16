@@ -156,10 +156,12 @@
 					});
 				});
 				
-				newEditor.on("change", function(){
+				newEditor.on("change", function(editor, change){
 					syncNewEditorWithCurrentEditor = false;
 					if(syncCurrentEditorWithNewEditor){
-						currentEditor.setValue(newEditor.getValue());
+						var textIsArray = change.text != "string" && change.text.length && typeof change.text.join != "undefined";
+						var text = textIsArray ? change.text.join("\n") : change.text;
+						currentEditor.replaceRange(text, change.from, change.to);
 					}
 					syncNewEditorWithCurrentEditor = true;
 				});
