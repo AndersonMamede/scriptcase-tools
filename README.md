@@ -75,6 +75,13 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ## Features
 
+### v1.3.5
+* Fix an issue which caused a warning message (string.split) to show on developer console
+
+### v1.3.4
+* Performance improvement for the new editor to work with large content
+* Fix an issue with Firefox which caused an warning message to show on developer console
+
 ### v1.3.3
 * Change how the Install Id is synchronized with Firebase
 
