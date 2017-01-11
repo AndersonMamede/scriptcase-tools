@@ -11,7 +11,7 @@
 		"restoreDeploySettings" : false,
 		"preventSessionTimeout" : false,
 		"preventSessionTimeoutMinutes" : 15,
-		"useNewEditor" : false,
+		"useNewEditor" : true,
 		"disableHoverOnMainMenu" : true,
 		"disableEditorLineWrapping" : true,
 		"useShortcutKeys" : true,
@@ -24,7 +24,10 @@
 		"loadCursorBack" : true,
 		"changeEditorFullscreen" : true,
 		"currentVersion" : null,
-		"installationId" : null
+		"installationId" : null,
+		
+		/* NE_* = New Editor */
+		"NE_enableLineWrapping" : false
 	};
 	
 	var settings = null;
