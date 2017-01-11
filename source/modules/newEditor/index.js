@@ -45,7 +45,7 @@
 			"cm/addon/search/searchcursor.js", "cm/addon/search/match-highlighter.js",
 			"cm/addon/fold/indent-fold.js", "cm/addon/show-invisibles.js",
 			"cm/addon/search/jump-to-line.js", "cm/addon/edit/matchbrackets.js",
-			"cm/addon/comment/comment.js"
+			"cm/addon/comment/comment.js", "cm/addon/emmet/emmet.js"
 		];
 		
 		var processQueue = function(){
@@ -96,6 +96,10 @@
 			}
 		});
 		
+		emmetCodeMirror(newEditor, {
+			"Cmd-E": "emmet.expand_abbreviation"
+		});
+		
 		setTheme(newEditorConfig.theme);
 		
 		newEditor.addKeyMap(CodeMirror.keyMap.sublime);
@@ -139,6 +143,14 @@
 					$fieldRunChange.val(this.value);
 				}
 			});
+			
+			// @date 04/01/2017
+			// for some unkown reason ScriptCase doesn't save changes made in the new editor if the
+			// type of the button is 'run' - unless the select #id_run_change is changed
+			var originalValue = $fieldRunChangeOriginal.val();
+			var differentValue = $fieldRunChangeOriginal.children("option:not([value='" + originalValue + "'])").val();
+			$fieldRunChange.val(differentValue).change();
+			$fieldRunChange.val(originalValue).change();
 		})();
 		
 		(function(){
