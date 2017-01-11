@@ -5,8 +5,10 @@
 [![Dependencies](https://img.shields.io/badge/dependencies-none-orange.svg)](https://github.com/AndersonMamede/scriptcase-tools/)
 [![License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://github.com/AndersonMamede/scriptcase-tools/blob/master/LICENSE)
 
+<br>
 If you have found this extension useful and it has contributed to your projects, consider buying me some coffees to fuel a hard coding day! :)<br>
 <a href="https://ko-fi.com/A763I0J" target="_blank"><img height="36" style="border:0px;height:36px;" src="https://az743702.vo.msecnd.net/cdn/kofi4.png?v=f" border="0" alt="Buy Me a Coffee at ko-fi.com" /></a>
+<br>
 
 # ScriptCase Tools
 A browser extension to make working with ScriptCase simpler and even more productive.
