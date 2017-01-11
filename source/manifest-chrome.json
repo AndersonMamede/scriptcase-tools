@@ -1,7 +1,7 @@
 {
 	"manifest_version" : 2,
 	
-	"version" : "1.3.4",
+	"version" : "1.3.6",
 	"name" : "ScriptCase Tools",
 	"short_name" : "SCT",
 	"description" : "A browser extension to make working with ScriptCase simpler and more productive",
@@ -48,7 +48,10 @@
 				"*://*/*/devel/compat/*",
 				"*://*/*/devel/iface/*"
 			],
-			"js" : ["modules/page_tools.js", "modules/session_ping.js", "modules/deploy.js"],
+			"js" : [
+				"modules/page_tools.js", "modules/session_ping.js",
+				"modules/deploy.js"
+			],
 			"all_frames" : true
 		},
 		{
@@ -120,6 +123,7 @@
 		"modules/newEditor/cm/addon/show-invisibles.js",
 		"modules/newEditor/cm/addon/edit/matchbrackets.js",
 		"modules/newEditor/cm/addon/comment/comment.js",
+		"modules/newEditor/cm/addon/emmet/emmet.js",
 		"modules/newEditor/img/fullscreen.png",
 		"modules/newEditor/img/search.png",
 		"modules/newEditor/img/replace.png",
