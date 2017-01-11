@@ -76,6 +76,13 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ## Features
 
+### v1.3.6
+* New features for the (new) code editor:
+	* [Emmet](http://docs.emmet.io/) - CTRL+E - see [docs](http://docs.emmet.io/cheat-sheet/){:target="_blank"}
+	* Lorem Ipsum generator - see [more details](http://docs.emmet.io/abbreviations/lorem-ipsum/){:target="_blank"}
+* Fix an issue which sometimes caused macro documentation not to get the selected text
+* Fix an issue with the Save command for buttons of type "Run"
+
 ### v1.3.5
 * Fix an issue which caused a warning message (string.split) to show on developer console
 
