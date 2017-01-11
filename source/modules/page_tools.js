@@ -556,6 +556,13 @@
 			var specialKeyDelay = 300;
 			
 			document.addEventListener("keydown", function(evt){
+				// capture for tab_shortcuts.js
+				if(evt.altKey && !evt.ctrlKey && !evt.shiftKey && fn.getNumericKeyFromKeyCode(evt.keyCode)){
+					evt.preventDefault();
+					evt.stopPropagation();
+					return false;
+				}
+				
 				if(hasSpecialKeyPressed(evt)){
 					specialKeyTimeout && clearTimeout(specialKeyTimeout);
 					specialKeyTimeout = setTimeout(function(){
@@ -610,7 +617,8 @@
 					sctEditorCursorPosition.load();
 				break;
 				case "macroDoc":
-					var newEditorFrame = fn.findElement("#newEditorFrame");
+					var activeIframeInnerDocuments = fn.getDocumentList(fn.getScActiveIframe().contentWindow);
+					var newEditorFrame = fn.findElement("#newEditorFrame", true, activeIframeInnerDocuments);
 					var editorDocument = newEditorFrame ? newEditorFrame.contentDocument : document;
 					
 					fn.appendScript(editorDocument, function(){
@@ -819,6 +827,24 @@
 			return false;
 		},
 		
+		getNumericKeyFromKeyCode : function(keyCode){
+			// numbers from numeric pad has different keycodes, and fromCharCode returns LETTERS for them;
+			// so it's necessary to normalize these keyCodes
+			// for more explanation see:
+			// http://stackoverflow.com/questions/1772179/get-character-value-from-keycode-in-javascript-then-trim
+			var normalizedKeyCode = (96 <= keyCode && keyCode <= 105) ? keyCode-48 : keyCode;
+			var value = String.fromCharCode(normalizedKeyCode);
+			return isNaN(value) ? null : value;
+		},
+		
+		isGeneratingApp : function(_isGenerating){
+			if(typeof _isGenerating != "undefined"){
+				sessionStorage.setItem("sctAppIsBeingGenerated", !!_isGenerating);
+			}else{
+				return sessionStorage.getItem("sctAppIsBeingGenerated");
+			}
+		},
+		
 		exportFn : function(fnList){
 			fnList.forEach(function(fnName){
 				window[fnName] = fn[fnName];
@@ -830,6 +856,7 @@
 	fn.exportFn([
 		"appendScript", "loadSettingsFromBackgroundPage",
 		"isPage", "findElement", "getEditorIdentifier",
-		"getTopWindow", "getDocumentList"
+		"getTopWindow", "getDocumentList", "getNumericKeyFromKeyCode",
+		"isGeneratingApp"
 	]);
 })();

@@ -39,8 +39,9 @@ input.param-input[disabled]{
 }
 
 input.param-input{
+	margin-top: -4px;
 	width: 35px;
-	vertical-align: initial;
+	vertical-align: top;
 	text-align: center;
 	color: #3E3F40;
 }
@@ -99,9 +100,8 @@ input[type="checkbox"] + label{
 	color: #FFFFFF;
 }
 
-#ext-version{
-	margin-left: 8px;
-	vertical-align: top;
+#sct-version{
+	vertical-align: bottom;
 }
 
 #form-field{
@@ -114,8 +114,12 @@ input[type="checkbox"] + label{
 
 .field-container.editor{
 	border-top: 1px solid #DEDEDE;
-	padding-top: 22px;
-	margin-top: 25px;
+	padding-top: 17px;
+	margin-top: 19px;
+}
+
+.field-container.editor *{
+	vertical-align: top;
 }
 
 #extEnabled ~ label{
@@ -132,6 +136,10 @@ input[type="checkbox"] + label{
 	color: #929292;
 }
 
+.shortcut-keys-container .block-text{
+	margin-bottom: 5px;
+}
+
 .shortcut-keys-container .field-container{
 	margin: 2px 0 3px 0;
 }
@@ -141,7 +149,7 @@ input[type="checkbox"] + label{
 }
 
 .button{
-	transition: 0.3s;
+	transition: background 0.3s;
 	position: relative;
 	margin: 0 5px;
 	padding: 4px 10px;
@@ -198,8 +206,9 @@ input[type="checkbox"] + label{
 }
 
 .info{
+	margin-top: -2px;
 	margin-left: 5px;
-	vertical-align: sub;
+	vertical-align: top;
 	transition: 0.3s;
 	opacity: 0.3;
 	cursor: pointer;
@@ -302,6 +311,14 @@ input[type="checkbox"] + label{
 	border-radius: 0;
 }
 
+.modal-editor_preferences .modal-title{
+	text-decoration: none;
+}
+
+.modal-editor_preferences .info{
+	vertical-align: middle;
+}
+
 #send-message{
 	transition: 0.3s;
 	position: absolute;
@@ -337,4 +354,10 @@ input[type="checkbox"] + label{
 
 #feedback-note{
 	color: #F44336;
+}
+
+#editor-preferences{
+	margin-left: 5px;
+	cursor: pointer;
+	color: #212121;
 }

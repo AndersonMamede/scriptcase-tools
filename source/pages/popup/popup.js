@@ -1,5 +1,8 @@
 "use strict";
 
+var sctVersion = chrome.runtime.getManifest().version;
+document.querySelector("#sct-version").innerText = "v" + sctVersion;
+
 $(document).ready(function(){
 	// Chrome uses "chrome";
 	// although Firefox can also use "chrome", we should
@@ -45,11 +48,30 @@ $(document).ready(function(){
 			"<p><b>*</b> Autocomplete for <u>any words</u> found in the current editor;</p>",
 			"<p><b>*</b> Highlight the <u>starting and ending brackets</u> (), {} and [] when cursor touches it;</p>"
 		].join(""),
+		"disableEditorLineWrapping" : [
+			"If this option is enabled, lines <b>will never be splitted</b> to fit in the available width.",
+			"<br><br>This option affects only the <b>old/native editor</b>.",
+			"<br>To change settings for the <b>new editor</b> click on <a href='#' class='btn-editor-preferences'>Preferences</a>."
+		].join(""),
 		"keySaveApp" : ["Perform the same action as the <u>save button</u> in the top toolbar."].join(""),
 		"keyGenerateSource" : ["Perform the same action as the <u>generate source code button</u> in the top toolbar."].join(""),
 		"keyRunApp" : [
 			"Perform the same action as the <u>run app button</u> in the top toolbar: ",
 			"save, generate and then run."
+		].join(""),
+		
+		"NE_enableLineWrapping" : [
+			"If this option is enabled, lines <b>will be splitted</b> to fit in the available width."
+		].join("")
+	};
+	
+	var modalContent = {
+		"editorPreferences" : [
+			"<div class='field-container'>",
+				"<input type='checkbox' id='NE_enableLineWrapping'/>",
+				"&nbsp;<label>Enable line/word wrapping</label>",
+				"<img src='/assets/img/icon-info.svg' class='info' data-info='NE_enableLineWrapping' width='16'/>",
+			"</div>"
 		].join("")
 	};
 	
@@ -62,7 +84,8 @@ $(document).ready(function(){
 		checkbox : [
 			"extEnabled", "restoreDeploySettings", "preventSessionTimeout",
 			"useNewEditor", "disableHoverOnMainMenu", "disableEditorLineWrapping",
-			"useShortcutKeys", "loadCursorBack", "changeEditorFullscreen"
+			"useShortcutKeys", "loadCursorBack", "changeEditorFullscreen",
+			"NE_enableLineWrapping"
 		]
 	};
 	
@@ -79,12 +102,20 @@ $(document).ready(function(){
 			});
 		},
 		
-		loadSettingsToFields : function(data){
+		loadSettingsToFields : function(data, specificFields){
 			fields.checkbox.forEach(id => {
+				if(typeof specificFields != "undefined" && specificFields.indexOf(id) == -1){
+					return;
+				}
+				
 				$("#" + id).prop("checked", data[id]);
 			});
 			
 			fields.text.forEach(id => {
+				if(typeof specificFields != "undefined" && specificFields.indexOf(id) == -1){
+					return;
+				}
+				
 				$("#" + id).val(data[id]);
 			});
 			
@@ -168,16 +199,115 @@ $(document).ready(function(){
 			return true;
 		},
 		
+		saveSettings : function($button, callback){
+			var newSettings = fn.getSettingsFromFields();
+			
+			if(!fn.validateNewSettings(newSettings)){
+				return;
+			}
+			
+			$button.addClass("busy");
+			
+			browser.runtime.sendMessage({
+				command : "setSettings",
+				newSettings : newSettings
+			}, function(){
+				fn.releaseButton($button, "done", function(){
+					fn.loadSettings();
+					
+					callback && callback();
+					
+					Modal.show("settings_saved", {
+						content : "Reload ScriptCase/editor to apply the changes.",
+						textAlign : "center"
+					});
+				});
+			});
+		},
+		
+		sendMessage : function($button, message, email){
+			if($button.hasClass("busy")){
+				return false;
+			}
+			
+			if(!email.length){
+				Modal.show("invalid_fields", {
+					title : "Invalid field(s)",
+					content : "You must inform your email address!",
+					textAlign : "center"
+				});
+				return false;
+			}
+			
+			if(!message.length){
+				Modal.show("invalid_fields", {
+					title : "Invalid field(s)",
+					content : "You must type a message to send!",
+					textAlign : "center"
+				});
+				return false;
+			}
+			
+			var _send = function(message){
+				var data = {
+					userAgent : window.navigator.userAgent,
+					language : window.navigator.language,
+					date : {".sv" : "timestamp"},
+					sctVersion : settings.currentVersion,
+					email : email,
+					message : message
+				};
+				
+				$.post(
+					"https://scriptcase-tools.firebaseio.com/feedback.json",
+					JSON.stringify(data)
+				).always(function(response){
+					if(!response || !response.name){
+						var errorMessage = "Error while sending message:\n";
+						if(response.status && response.responseJSON){
+							errorMessage += response.status + " - " + response.responseJSON.error;
+						}else{
+							errorMessage += "Unknown error";
+						}
+						
+						return fn.releaseButton($button, "fail", function(){
+							Modal.show("fail", {
+								content : errorMessage
+							});
+						});
+					}
+					
+					return fn.releaseButton($button, "done", function(){
+						Modal.close("feedback");
+						setTimeout(function(){
+							Modal.show("feedback_sent", {
+								title : "Thank you!",
+								content : [
+									"We appreciate your feedback and we'll use it to create a better tool.<br>",
+									"Thank you!"
+								].join("")
+							});
+						}, 100);
+					});
+				});
+			};
+			
+			$button.addClass("busy");
+			_send(message);
+			
+			return false;
+		},
+		
 		bindEvents : function(){
-			$(".info").click(function(){
-				window.Modal.show("info", {
+			$("body").on("click", ".info", function(){
+				Modal.show("info", {
 					title : "Info",
 					content : infoContent[this.getAttribute("data-info")]
 				});
 			});
 			
 			$("#send-message").click(function(){
-				window.Modal.show("feedback", {
+				Modal.show("feedback", {
 					title : "Let us know what you think",
 					content : $("#feedback-container").html(),
 					defaultButtonText : "Cancel",
@@ -187,77 +317,7 @@ $(document).ready(function(){
 							var $button = $(this).blur();
 							var message = $.trim($("#feedback-message").val());
 							var email = $.trim($("#feedback-email").val());
-							
-							if($button.hasClass("busy")){
-								return false;
-							}
-							
-							if(!email.length){
-								Modal.show("invalid_fields", {
-									title : "Invalid field(s)",
-									content : "You must inform your email address!",
-									textAlign : "center"
-								});
-								return false;
-							}
-							
-							if(!message.length){
-								Modal.show("invalid_fields", {
-									title : "Invalid field(s)",
-									content : "You must type a message to send!",
-									textAlign : "center"
-								});
-								return false;
-							}
-							
-							var _sendMessage = function(message){
-								var data = {
-									userAgent : window.navigator.userAgent,
-									language : window.navigator.language,
-									date : {".sv" : "timestamp"},
-									sctVersion : settings.currentVersion,
-									email : email,
-									message : message
-								};
-								
-								$.post(
-									"https://scriptcase-tools.firebaseio.com/feedback.json",
-									JSON.stringify(data)
-								).always(function(response){
-									if(!response || !response.name){
-										var errorMessage = "Error while sending message:\n";
-										if(response.status && response.responseJSON){
-											errorMessage += response.status + " - " + response.responseJSON.error;
-										}else{
-											errorMessage += "Unknown error";
-										}
-										
-										return fn.releaseButton($button, "fail", function(){
-											Modal.show("fail", {
-												content : errorMessage
-											});
-										});
-									}
-									
-									return fn.releaseButton($button, "done", function(){
-										window.Modal.close("feedback");
-										setTimeout(function(){
-											Modal.show("feedback_sent", {
-												title : "Thank you!",
-												content : [
-													"We appreciate your feedback and we'll use it to create a better tool.<br>",
-													"Thank you!"
-												].join("")
-											});
-										}, 100);
-									});
-								});
-							};
-							
-							$button.addClass("busy");
-							_sendMessage(message);
-							
-							return false;
+							return fn.sendMessage($button, message, email);
 						}
 					}
 				});
@@ -266,26 +326,7 @@ $(document).ready(function(){
 			});
 			
 			$("#form-field").on("click", "#save-settings:not(.busy)", function(){
-				var $button = $(this).blur();
-				var newSettings = fn.getSettingsFromFields();
-				
-				if(!fn.validateNewSettings(newSettings)){
-					return;
-				}
-				
-				$button.addClass("busy");
-				
-				browser.runtime.sendMessage({
-					command : "setSettings",
-					newSettings : newSettings
-				}, function(){
-					fn.releaseButton($button, "done", function(){
-						Modal.show("settings_saved", {
-							content : "Reload ScriptCase to apply the changes.",
-							textAlign : "center"
-						});
-					});
-				});
+				fn.saveSettings($(this).blur());
 			});
 			
 			$("#form-field").on("click", "#load-default-settings:not(.busy)", function(){
@@ -312,7 +353,7 @@ $(document).ready(function(){
 					});
 			});
 			
-			$("label").click(function handleLabelClick(){
+			$("body").on("click", "label", function handleLabelClick(){
 				var $label = $(this);
 				var $input = $(this).closest(".field-container").find("input").first();
 				var inputType = $input.prop("type");
@@ -333,6 +374,28 @@ $(document).ready(function(){
 						$input.trigger("change");
 					break;
 				}
+			});
+			
+			$("body").on("click", ".btn-editor-preferences", function editorPreferences(evt){
+				Modal.close("info");
+				
+				Modal.show("editor_preferences", {
+					title : "Preferences (for new editor)",
+					content : modalContent.editorPreferences,
+					defaultButtonText : "Close",
+					extraButton : {
+						"Save settings" : function(){
+							fn.saveSettings($(this).blur(), function(){
+								Modal.close("editor_preferences");
+							});
+						}
+					}
+				});
+				
+				fn.loadSettingsToFields(settings, ["NE_enableLineWrapping"]);
+				
+				evt.preventDefault();
+				return false;
 			});
 		},
 		

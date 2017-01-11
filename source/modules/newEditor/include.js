@@ -338,11 +338,14 @@
 				script.src = newEditorPath + "/index.js#" + newEditorPath;
 				script.onload = function(){
 					editorFrame.contentWindow.whenEditorLoaded(function(newEditor){
-						if(sctSettings.disableEditorLineWrapping){
+						if(sctSettings.NE_enableLineWrapping){
+							newEditor.setOption("lineWrapping", true);
+						}else{
 							newEditor.setOption("lineWrapping", false);
 						}
 						
-						// set value, load editor state and clear history to prevent ctrl+z resetting the initial code
+						// set value, load editor's state and clear history to
+						// prevent ctrl+z resetting the initial code
 						newEditor.setValue(window.editor.getValue());
 						
 						_loadNewEditorState(newEditor);
@@ -378,7 +381,6 @@
 					}, 300);
 				};
 			};
-			
 			
 			_addEditor();
 		},
