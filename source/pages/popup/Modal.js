@@ -31,6 +31,8 @@ window.Modal = new (function(){
 			modalData[modalId].$elements.modalToolbar.appendTo(modalData[modalId].$elements.modalBody);
 			modalData[modalId].$elements.defaultButton.appendTo(modalData[modalId].$elements.modalToolbar);
 			
+			modalData[modalId].$elements.modal.addClass("modal-" + modalId);
+			
 			modalData[modalId].$elements.defaultButton.click(function(){
 				fn.close(modalId);
 			});
@@ -62,6 +64,10 @@ window.Modal = new (function(){
 			
 			if(options.defaultButtonText){
 				modalData[modalId].$elements.defaultButton.text(options.defaultButtonText);
+			}
+			
+			if(options.defaultButton === false){
+				modalData[modalId].$elements.defaultButton.remove();
 			}
 			
 			fn.parseExtraButtons(modalId, options.extraButton);

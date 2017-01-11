@@ -6,7 +6,10 @@
 		<link href="welcome.css" rel="stylesheet">
 	</head>
 	<body>
-		<div id="update-message">ScriptCase Tools has been updated!</div>
+		<div id="update-message">
+			ScriptCase Tools has been updated!
+			See changelog below <a href="#changelog" class="changelog-link">or click here</a>.
+		</div>
 		<h1>ScriptCase Tools</h1>
 		<p>
 			<i>A browser extension to make working with ScriptCase simpler and more productive.</i>
@@ -31,51 +34,65 @@
 				<img src="/assets/img/new.svg" alt="" class="badge">
 			</div>
 		</div>
-		<h2 class="purple">* To use the new editor, go to settings panel, enable the option '<i>Use new code editor</i>', save, and reload ScriptCase:</h2><br>
+		<h2 class="purple">* To use the new editor go to settings panel, enable <span class="pink">Use new code editor</span>, save, and then reload ScriptCase:</h2><br>
 		<div class="text-center">
 			<img src="/assets/img/new-editor-option.png" class="responsive">
 		</div>
 		<div class="separator"></div>
 		<div id="changelog">
 			<h2>Changelog</h2>
-			<h3 class="highlight">v1.3.4</h3>
+			<h3 class="highlight">v1.3.6 (current version)</h3>
+			<ul class="highlight-list">
+				<li>
+					<strong>New features</strong> for the (new) code editor:<br>
+					<div class="marginLeft-40"><a href="#http://docs.emmet.io/">Emmet</a> - CTRL+E - see <a href="http://docs.emmet.io/cheat-sheet/" target="_blank">docs</a></div>
+					<div class="marginLeft-40">Lorem Ipsum generator - see <a href="http://docs.emmet.io/abbreviations/lorem-ipsum/" target="_blank">more details</a></div>
+				</li>
+				<li>Fix an issue which sometimes caused macro documentation not to get the selected text</li>
+				<li>Fix an issue with the Save command for buttons of type "Run"</li>
+			</ul>
+			<h3>v1.3.5</h3>
+			<ul>
+				<li>Fix an issue which caused a warning message (string.split) to show on developer console</li>
+			</ul>
+			<h3>v1.3.4</h3>
 			<ul>
 				<li>Performance improvement for the new editor to work with large content</li>
-				<li>Fix an issue with Firefox which caused an warning message to show on developer console</li>
+				<li>Fix an issue with Firefox which caused a warning message to show on developer console</li>
 			</ul>
-			<h3 class="highlight">v1.3.3</h3>
+			<h3>v1.3.3</h3>
 			<ul>
-				<li>* Change how the Install Id is synchronized with Firebase</li>
+				<li>Change how the Install Id is synchronized with Firebase</li>
 			</ul>
-			<h3 class="highlight">v1.3.2</h3>
+			<h3>v1.3.2</h3>
 			<ul>
 				<li>Fix a problem that caused the field to select the event 'OnRecord/OnFinish' to be hidden when editing a 'Run' button</li>
 				<li>Change alert messages to use the modal module</li>
 			</ul>
-			<h3 class="highlight">v1.3.0</h3>
+			<h3>v1.3.0</h3>
 			<ul>
 				<li>Install Id and Uninstall survey</li>
 			</ul>
-			<h3 class="highlight">v1.2.1</h3>
+			<h3>v1.2.1</h3>
 			<ul>
 				<li>Add email field in feedback form</li>
 			</ul>
 			<h3 class="highlight">v1.2.0</h3>
-			<ul>
+			<ul class="highlight-list">
 				<li>Release for Firefox</li>
 			</ul>
-			<h3 class="highlight">v1.1.1</h3>
+			<h3>v1.1.1</h3>
 			<ul>
 				<li>Fix a problem that caused the new editor in "Templates HTML" page (app_template.php) not restore sublime marks/fold/cursor when navigating through the left menu (templates);</u></li>
 			</ul>
-			<h3 class="highlight">v1.1.0</h3>
+			<h3>v1.1.0</h3>
 			<ul>
 				<li>New option to <u>prevent ScriptCase session from timing out;</u></li>
 				<li>Now you can <u>select a text</u> (macro) on editor and press the shortcut key to <u>open its documentation</u> (default shortcut key is F1);</li>
 				<li>New <u>feedback form</u> in the popup/settings box</li>
 			</ul>
 			<h3 class="highlight">v1.0.0</h3>
-			<ul>
+			<ul class="highlight-list">
 				<li><u>Internal libraries</u> and <u>Templates HTML</u> also restore last cursor and scroll position;</li>
 				<li>New option to always restore <u>last settings</u> used to <u>deploy</u>;</li>
 				<li>

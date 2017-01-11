@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<div id="popup-title">
-			ScriptCase Tools v1.3.5
+			ScriptCase Tools <span id="sct-version"></span>
 			<img src="/assets/img/message.svg" id="send-message" class="blink" title="Click to send us message (feedback, suggestions, report bugs, etc)">
 		</div>
 		<div id="form-field">
@@ -34,18 +34,20 @@
 				<input type="checkbox" id="useNewEditor"/>
 				<label>Use new code editor</label>
 				<img src="/assets/img/icon-info.svg" class="info" data-info="useNewEditor" width="16"/>
-				<span>- See</span> <a href="/pages/key_bindings/index.html" target="_blank">key bindings</a>
+				<span><a href="#" class="btn-editor-preferences">Preferences</a></span>
+				<span>&nbsp;-&nbsp;&nbsp;See</span> <a href="/pages/key_bindings/index.html" target="_blank">key bindings</a>
 			</div>
 			<div class="field-container">
 				<input type="checkbox" id="disableEditorLineWrapping"/>
 				<label>Disable line/word wrapping in code editor</label>
+				<img src="/assets/img/icon-info.svg" class="info" data-info="disableEditorLineWrapping" width="16"/>
 			</div>
 			<div class="field-container">
 				<input type="checkbox" id="useShortcutKeys"/>
 				<label>Enable shortcut keys</label>
 			</div>
 			<div class="shortcut-keys-container">
-				<div>Shortcut keys (F1 to F12):</div>
+				<div class="block-text">Shortcut keys (F1 to F12):</div>
 				<div class="field-container">
 					<input type="text" id="keyMacroDoc" class="shortcut-key param-input" maxlength="3" disabled/>
 					<label>Show documentation (ScriptCase's macros)</label>

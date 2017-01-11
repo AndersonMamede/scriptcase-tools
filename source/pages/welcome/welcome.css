@@ -35,6 +35,10 @@ body.updated #update-message{
 	display: block;
 }
 
+#update-message .changelog-link{
+	color: #FFFFFF;
+}
+
 h1, h2, h3{
 	color: #212121;
 }
@@ -82,6 +86,14 @@ h4, h4 a, h4 a:visited{
 	color: #663399;
 }
 
+.pink{
+	color: #E83668;
+}
+
+.marginLeft-40{
+	margin-left: 40px;
+}
+
 .separator{
 	margin: 45px auto 40px auto;
 	width: 60%;
@@ -112,6 +124,10 @@ li u{
 	color: #3749AF;
 }
 
+li strong{
+	color: #000000;
+}
+
 .container{
 	position: relative;
 }
@@ -135,7 +151,11 @@ li u{
 }
 
 .highlight{
-	color: #001EC7;
+	color: #FF2C2C;
+}
+
+.highlight-list{
+	font-size: 16px;
 }
 
 .configure-instructions{
