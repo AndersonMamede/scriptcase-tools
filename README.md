@@ -78,8 +78,8 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ### v1.3.6
 * New features for the (new) code editor:
-	* [Emmet](http://docs.emmet.io/) - CTRL+E - see [docs](http://docs.emmet.io/cheat-sheet/){:target="_blank"}
-	* Lorem Ipsum generator - see [more details](http://docs.emmet.io/abbreviations/lorem-ipsum/){:target="_blank"}
+	* [Emmet](http://docs.emmet.io/) - CTRL+E - see <a href="http://docs.emmet.io/cheat-sheet/" target="_blank">docs</a>
+	* Lorem Ipsum generator - see <a href="http://docs.emmet.io/abbreviations/lorem-ipsum/" target="_blank">more details</a>
 * Fix an issue which sometimes caused macro documentation not to get the selected text
 * Fix an issue with the Save command for buttons of type "Run"
 
