@@ -85,6 +85,7 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 * New features for the (new) code editor:
 	* [Emmet](http://docs.emmet.io/) - CTRL+E - see [docs](http://docs.emmet.io/cheat-sheet/)
 	* Lorem Ipsum generator - see [more details](http://docs.emmet.io/abbreviations/lorem-ipsum/)
+* New option to change settings for the new editor ("Preferences")
 * Fix an issue which sometimes caused macro documentation not to get the selected text
 * Fix an issue with the Save command for buttons of type "Run"
 
