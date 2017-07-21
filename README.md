@@ -1,4 +1,4 @@
-[![Installations](https://img.shields.io/badge/installations-1339-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools#firefox)
+[![Installations](https://img.shields.io/badge/installations-1386-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools#firefox)
 [![ScriptCase - v7 v8](https://img.shields.io/badge/scriptcase-v7%20%7C%20v8-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools/)
 [![Chrome WebStore](https://img.shields.io/badge/platform-Chrome-brightgreen.svg)](https://chrome.google.com/webstore/detail/scriptcase-tools/mfokofbgiajojbgginjeglebmpejnpdm?utm_source=chrome-app-launcher-info-dialog)
 [![Firefox](https://img.shields.io/badge/platform-Firefox-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools#firefox)
