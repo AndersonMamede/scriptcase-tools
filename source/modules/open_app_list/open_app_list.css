@@ -1,0 +1,132 @@
+#appSelection{
+	-moz-user-select: none;
+	user-select: none;
+	position: fixed;
+	z-index: 999999;
+	right: 5px;
+	bottom: 4px;
+}
+
+#appSelection *:not(.ui-button):not(.ui-button-text){
+	margin: 0;
+	padding: 0;
+	width: auto;
+}
+
+#appSelection ul{
+	position: absolute;
+	z-index: 999999;
+	padding: 3px 0;
+}
+
+#appSelection ul > li:first-child{
+	border-radius: 5px 5px 0 0;
+}
+
+#appSelection ul > li:last-child{
+	border-radius: 0 0 5px 5px;
+}
+
+#appSelection #appSelection-menu{
+	right: 0;
+	-webkit-transform: translateY(-100%);
+	-moz-transform: translateY(-100%);
+	transform: translateY(-100%);
+}
+
+#appSelection:not(.active) #appSelection-menu{
+	display: none;
+}
+
+#appSelection #appSelection-menu li{
+	position: relative;
+	padding: 8px 12px;
+	list-style: none;
+	white-space: nowrap;
+}
+
+#appSelection #appSelection-menu ul{
+	display: none;
+	bottom: 0;
+	left: 0;
+	-webkit-transform: translate(-100%);
+	-moz-transform: translate(-100%);
+	transform: translate(-100%);
+}
+
+#appSelection #appSelection-menu li:hover > ul{
+	display: block;
+}
+
+#appSelection #appSelection-toggleMenu,
+#appSelection li{
+	background: #4285E8;
+	color: #FFFFFF;
+	cursor: pointer;
+	-webkit-transition: 0.3s;
+	-moz-transition: 0.3s;
+	transition: 0.3s;
+}
+
+#appSelection.active #appSelection-toggleMenu,
+#appSelection #appSelection-toggleMenu:hover,
+#appSelection li:hover{
+	background: #095DD8;
+}
+
+#appSelection #appSelection-menu #appSelection-selectionList li{
+	padding-left: 20px;
+	padding-right: 40px;
+}
+
+#appSelection #appSelection-menu #appSelection-selectionList li#appSelection-clearSavedSelection{
+	padding-right: 20px;
+}
+
+#appSelection #appSelection-menu .appSelection-restoreSelection::before{
+	content: "\00BB \0020";
+	position: absolute;
+	margin-top: -2px;
+	margin-left: -10px;
+}
+
+#appSelection #appSelection-menu .appSelection-removeSavedSelection{
+	display: none;
+	position: absolute;
+	z-index: 9999999;
+	right: 9px;
+	margin-top: -1px;
+	width: 16px;
+	height: 16px;
+	background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDQ0IDQ0IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA0NCA0NCIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4Ij4KICA8cGF0aCBkPSJtMjIsMGMtMTIuMiwwLTIyLDkuOC0yMiwyMnM5LjgsMjIgMjIsMjIgMjItOS44IDIyLTIyLTkuOC0yMi0yMi0yMnptMy4yLDIyLjRsNy41LDcuNWMwLjIsMC4yIDAuMywwLjUgMC4zLDAuN3MtMC4xLDAuNS0wLjMsMC43bC0xLjQsMS40Yy0wLjIsMC4yLTAuNSwwLjMtMC43LDAuMy0wLjMsMC0wLjUtMC4xLTAuNy0wLjNsLTcuNS03LjVjLTAuMi0wLjItMC41LTAuMi0wLjcsMGwtNy41LDcuNWMtMC4yLDAuMi0wLjUsMC4zLTAuNywwLjMtMC4zLDAtMC41LTAuMS0wLjctMC4zbC0xLjQtMS40Yy0wLjItMC4yLTAuMy0wLjUtMC4zLTAuN3MwLjEtMC41IDAuMy0wLjdsNy41LTcuNWMwLjItMC4yIDAuMi0wLjUgMC0wLjdsLTcuNS03LjVjLTAuMi0wLjItMC4zLTAuNS0wLjMtMC43czAuMS0wLjUgMC4zLTAuN2wxLjQtMS40YzAuMi0wLjIgMC41LTAuMyAwLjctMC4zczAuNSwwLjEgMC43LDAuM2w3LjUsNy41YzAuMiwwLjIgMC41LDAuMiAwLjcsMGw3LjUtNy41YzAuMi0wLjIgMC41LTAuMyAwLjctMC4zIDAuMywwIDAuNSwwLjEgMC43LDAuM2wxLjQsMS40YzAuMiwwLjIgMC4zLDAuNSAwLjMsMC43cy0wLjEsMC41LTAuMywwLjdsLTcuNSw3LjVjLTAuMiwwLjEtMC4yLDAuNSAzLjU1MjcxZS0xNSwwLjd6IiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=);
+	background-size: cover;
+	-webkit-transition: 0.3s;
+	-moz-transition: 0.3s;
+	transition: 0.3s;
+	opacity: 0.5;
+}
+
+#appSelection #appSelection-menu .appSelection-restoreSelection:hover .appSelection-removeSavedSelection{
+	display: inline-block;
+}
+
+#appSelection #appSelection-menu .appSelection-removeSavedSelection:hover{
+	opacity: 1;
+}
+
+#appSelection #appSelection-menu #appSelection-clearSavedSelection{
+	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+	text-align: center;
+}
+
+#appSelection #appSelection-menu #appSelection-selectionList{
+	max-height: 400px;
+	overflow: auto;
+}
+
+#appSelection #appSelection-menu .appSelection-selectionList-is-empty li{
+	border-radius: 5px;
+	border: none;
+	text-decoration: line-through;
+	cursor: not-allowed;
+}
