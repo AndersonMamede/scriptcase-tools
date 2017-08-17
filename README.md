@@ -1,5 +1,5 @@
 [![Installations](https://img.shields.io/badge/installations-1386-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools#firefox)
-[![ScriptCase - v7 v8](https://img.shields.io/badge/scriptcase-v7%20%7C%20v8-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools/)
+[![ScriptCase - v7 v8 v9](https://img.shields.io/badge/scriptcase-v7%20%7C%20v8%20%7C%20v9-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools/)
 [![Chrome WebStore](https://img.shields.io/badge/platform-Chrome-brightgreen.svg)](https://chrome.google.com/webstore/detail/scriptcase-tools/mfokofbgiajojbgginjeglebmpejnpdm?utm_source=chrome-app-launcher-info-dialog)
 [![Firefox](https://img.shields.io/badge/platform-Firefox-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools#firefox)
 [![Dependencies](https://img.shields.io/badge/dependencies-none-orange.svg)](https://github.com/AndersonMamede/scriptcase-tools/)
@@ -45,6 +45,7 @@ That is why there's not an official link in Firefox's webstore for ScriptCase To
 ## ScriptCase Support
 * ScriptCase v7
 * ScriptCase v8
+* ScriptCase v9
 
 Other ScriptCase versions might work correctly, but were not tested.
 
@@ -75,6 +76,9 @@ This project is not affiliated with, sponsored by, or endorsed by Netmake Soluç
 Licensed under the MIT License. Please see [LICENSE](LICENSE) for more information.
 
 ## Features
+
+### v1.4.0
+* Add full compatibility with ScriptCase 9
 
 ### v1.3.6
 * New features for the (new) code editor:
