@@ -16,33 +16,37 @@
 					return;
 				}
 				
-				fn.bindEvents();
+				var _init = function(){
+					fn.bindEvents();
+					
+					if(settings.disableHoverOnMainMenu){
+						fn.disableHoverOnMainMenu();
+					}
+					
+					if(settings.disableEditorLineWrapping){
+						fn.disableEditorLineWrapping();
+					}
+					
+					if(settings.loadCursorBack){
+						fn.controlEditorCursor();
+					}
+					
+					if(settings.changeEditorFullscreen){
+						fn.addToggleFullScreenEditor();
+					}
+					
+					if(settings.useShortcutKeys){
+						fn.enableShortcutKeys();
+					}
+					
+					fn.focusFirstField();
+				};
 				
-				if(settings.disableHoverOnMainMenu){
-					fn.disableHoverOnMainMenu();
+				if(fn.isPage(["iface/login.php", "iface/index.php"])){
+					fn.findScriptCaseVersion(_init);
+				}else{
+					_init();
 				}
-				
-				if(settings.disableEditorLineWrapping){
-					fn.disableEditorLineWrapping();
-				}
-				
-				if(settings.loadCursorBack){
-					fn.controlEditorCursor();
-				}
-				
-				if(settings.changeEditorFullscreen){
-					fn.addToggleFullScreenEditor();
-				}
-				
-				if(settings.useShortcutKeys){
-					fn.enableShortcutKeys();
-				}
-				
-				if(fn.isPage("iface/index.php")){
-					fn.addGetScriptCaseVersion();
-				}
-				
-				fn.focusFirstField();
 			});
 		},
 		
@@ -231,30 +235,43 @@
 		
 		disableHoverOnMainMenu : function(){
 			fn.appendScript(document, function(){
-				if(typeof $ != "function" || !$("#topnav").length){
+				if(typeof $ != "function"){
 					return;
 				}
 				
-				var $topnav = $("#topnav");
 				var $head = $("head");
+				
+				if(localStorage.sctScVersion == 9){
+					var $menu = $(".app .app-menu .sc9-menu > ul");
+					var $style = $([
+						"<style type='text/css'>",
+							".app .app-menu .sc9-menu > ul > li:hover > ul{display:none;}",
+						"</style>"
+					].join(""));
+				}else{
+					var $menu = $("#topnav");
+					var $style = $([
+						"<style type='text/css'>",
+							"ul.topnav{display:none!important}",
+							"li.active > ul.topnav{display:block!important}",
+						"</style>"
+					].join(""));
+				}
+				
+				if(!$menu.length){
+					return;
+				}
 				
 				// the simplest way found to disable the default behavior (open menu when hover) is:
 				// 1 - overwrite original ScriptCase's CSS to always hide the menu (made by $style)
-				// 2 - and when user clicks in topnav, remove that piece of CSS code that was hiding the
-				// menu, so menu is visible again (because of the hover on the topnav)
-				// 3 - and when user leaves the topnav>li, add again the CSS to hide the menu (on hover)
-				var $style = $([
-					"<style type='text/css'>",
-						"ul.topnav{display:none!important}",
-						"li.active > ul.topnav{display:block!important}",
-					"</style>"
-				].join("")).appendTo($head);
-				
-				$topnav.on("click", "> li", function(){
+				// 2 - and when user clicks on menu, remove that piece of CSS code that was hiding the
+				// menu so menu is visible again (because of the hover on the topnav)
+				// 3 - and when user leaves the menu, add again the CSS to hide the menu (on hover)
+				$menu.on("click", "> li", function(){
 					$style.remove();
 				});
 				
-				$topnav.on("mouseleave", "> li", function(e){
+				$menu.on("mouseleave", "> li", function(e){
 					e.stopPropagation();
 					$style.appendTo($head);
 				});
@@ -596,13 +613,21 @@
 				case "saveApp":
 				case "generateApp":
 				case "runApp":
-					var buttonSelector = {
+					var elementSelector = {
 						saveApp : "#id_toolbar_app_save",
 						generateApp : "#id_toolbar_app_generate",
 						runApp : "#id_toolbar_app_run"
 					};
 					
-					var button = fn.findElement(buttonSelector[command]);
+					var element = fn.findElement(elementSelector[command]);
+					
+					if(!element || element.getAttribute("disabled")){
+						return;
+					}
+					
+					// for ScriptCase9, the click should be on element "a";
+					// for older versions, the click should be on the element with the ID
+					var button = element.querySelector("a") || element;
 					
 					if(!button || button.getAttribute("disabled")){
 						return;
@@ -710,7 +735,7 @@
 		
 		prepareToUseShortcutKeys : function(){
 			fn.appendScript(document, function(){
-				// skip if the function 'nm_app_run' doesn't
+				// skip if function 'nm_app_run' doesn't
 				// exist (because this is the function where the changes are made)
 				if(typeof nm_app_run != "function"){
 					return;
@@ -749,35 +774,53 @@
 			}
 			
 			var topWindowUrl = fn.getTopWindow().location.href;
-			var docUrl = topWindowUrl.replace(/devel\/iface\/.*/i, "");
-			docUrl += "doc/manual_mp/28-Macros/00-macros_sc.htm#" + macroName;
+			
+			if(fn.getScriptCaseVersion() == 9){
+				// documentation in earlier version of ScriptCase 9 (e.g. 9.0.015) doesn't work with #macroName,
+				// so the online documentation is used instead
+				var docUrl = "http://www.scriptcase.net/docs/en_us/v9/manual/14-macros/01-general-view/";
+			}else{
+				var docUrl = topWindowUrl.replace(/devel\/iface\/.*/i, "");
+				docUrl += "doc/manual_mp/28-Macros/00-macros_sc.htm";
+			}
+			
+			docUrl += "#" + macroName;
 			window.open(docUrl);
 		},
 		
-		addGetScriptCaseVersion : function(){
-			fn.appendScript(document, function(){
-				var _returnVersion = function(detailedVersion){
-					if(detailedVersion){
-						return window.ScriptCaseVersion;
-					}else{
-						var version = window.ScriptCaseVersion.split(".");
-						return version[0];
-					}
-				};
-				
-				window.getScriptCaseVersion = function(detailedVersion){
-					if(window.ScriptCaseVersion){
-						return _returnVersion(detailedVersion);
+		getScriptCaseVersion : function(){
+			return localStorage.getItem("sctScVersion");
+		},
+		
+		findScriptCaseVersion : function(callback){
+			var version = fn.getScriptCaseVersion();
+			
+			if(version){
+				callback && callback();
+				return version;
+			}
+			
+			// scriptcase doesn't store its version in a varible but it can be retrieved from a page;
+			// the page "errorhandler.php" was chosen because it's fast, small and it exists in SC 7, 8 and 9
+			var url = "errorhandler.php";
+			
+			fetch(url)
+				.then(function(response){
+					return response.text();
+				})
+				.then(function(content){
+					var result = content.match(/css\/scriptcase([0-9.]+)\.css/im);
+					var version = result ? result[1].split("") : "";
+					
+					if(version && version[0]){
+						localStorage.setItem("sctScVersion", version[0]);
 					}
 					
-					$("<div></div>").load("about.php", function(){
-						var version = $(this).find(".nmText").eq(3).text();
-						window.ScriptCaseVersion = version;
-						return _returnVersion(detailedVersion);
-					});
-				};
-				window.getScriptCaseVersion();
-			});
+					callback && callback();
+				})
+				.catch(function(){
+					callback && callback();
+				});
 		},
 		
 		getEditorIdentifier : function(){
@@ -857,6 +900,7 @@
 		"appendScript", "loadSettingsFromBackgroundPage",
 		"isPage", "findElement", "getEditorIdentifier",
 		"getTopWindow", "getDocumentList", "getNumericKeyFromKeyCode",
-		"isGeneratingApp"
+		"isGeneratingApp", "getProjectName", "getProjectVersion",
+		"createHashFromString"
 	]);
 })();

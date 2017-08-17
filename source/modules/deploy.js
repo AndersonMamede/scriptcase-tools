@@ -121,9 +121,9 @@
 			return;
 		}
 		
-		var projectNameElement = window.findElement("#id_toolbar_codgrp");
-		if(projectNameElement){
-			window.appendScript(document, controlDeploy, projectNameElement.innerText);
+		var projectName = window.getProjectName();
+		if(projectName){
+			window.appendScript(document, controlDeploy, projectName);
 		}
 	});
 })();
