@@ -845,13 +845,9 @@
     }
     
     function ScriptCaseMacros(){
-        var topWindow = window;
-        
-        while(topWindow.parent != topWindow){
-            topWindow = topWindow.parent;
-        }
-        
-        if(topWindow.getScriptCaseVersion && topWindow.getScriptCaseVersion() == "7"){
+        if(localStorage.getItem("sctScVersion") == 9){
+            return window.ScriptCase9MacrosHint || [];
+        }else if(localStorage.getItem("sctScVersion") == 7){
             return window.ScriptCase7MacrosHint || [];
         }else{
             return window.ScriptCase8MacrosHint || [];

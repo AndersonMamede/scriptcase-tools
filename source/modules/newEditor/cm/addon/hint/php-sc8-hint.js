@@ -22,7 +22,7 @@ window.ScriptCase8MacrosHint = [
 	{
 		displayText : "sc_connection_edit",
 		text : "sc_connection_edit",
-		code : 'sc_connection_edit("Connetion_Name", $arr_conn)'
+		code : 'sc_connection_edit("Connection_Name", $arr_conn)'
 	},
 	{
 		displayText : "sc_connection_new",
