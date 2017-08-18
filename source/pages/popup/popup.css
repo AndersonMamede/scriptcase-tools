@@ -132,6 +132,11 @@ input[type="checkbox"] + label{
 	color: #EA4875;
 }
 
+#enableAppSelection ~ label{
+	font-weight: bold;
+	color: #A74DDE;
+}
+
 .shortcut-keys-container:not(.active){
 	color: #929292;
 }
@@ -360,4 +365,13 @@ input[type="checkbox"] + label{
 	margin-left: 5px;
 	cursor: pointer;
 	color: #212121;
+}
+
+#option-app-selection .image{
+	text-align: center;
+}
+
+#option-app-selection .image img{
+	margin: 20px 0;
+	border: 1px solid #CCC;
 }

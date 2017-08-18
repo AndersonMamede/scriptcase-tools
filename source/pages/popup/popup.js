@@ -36,6 +36,16 @@ $(document).ready(function(){
 			"someone else could use your computer and access ScriptCase IDE environment using your credentials (because unless ",
 			"you had logged out before, your session would still be active)."
 		].join(""),
+		"enableAppSelection" : [
+			"<dv id='option-app-selection'>",
+				"When this feature is enabled, a new button \"App Selection\" is shown on the toolbar at the bottom of Home tab:",
+				"<div class='image'><img src='../../assets/img/app-selection.png' height='187'/></div>",
+				"This button allows you to quickly:<br>",
+				"&nbsp;&nbsp;- select/unselect all outdated applications;<br>",
+				"&nbsp;&nbsp;- save current selection;<br>",
+				"&nbsp;&nbsp;- restore a previously saved selection;",
+			"</div>"
+		].join(""),
 		"useNewEditor" : [
 			"Switch default code editor to a <u>newer</u> and <u>more complete</u> editor:<br><br>",
 			"<p><b>*</b> Sublime Text-based <u>key bindings</u> (e.g., jump to line, selext next/all occurrences, duplicate line, etc). ",
@@ -83,9 +93,9 @@ $(document).ready(function(){
 		],
 		checkbox : [
 			"extEnabled", "restoreDeploySettings", "preventSessionTimeout",
-			"useNewEditor", "disableHoverOnMainMenu", "disableEditorLineWrapping",
-			"useShortcutKeys", "loadCursorBack", "changeEditorFullscreen",
-			"NE_enableLineWrapping"
+			"enableAppSelection", "useNewEditor", "disableHoverOnMainMenu",
+			"disableEditorLineWrapping", "useShortcutKeys", "loadCursorBack",
+			"changeEditorFullscreen", "NE_enableLineWrapping"
 		]
 	};
 	
