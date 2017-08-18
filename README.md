@@ -79,7 +79,7 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ### v1.4.1
 * Fix an issue which prevented the option "Parameters(Fields)" to be shown when editing an ajax event (thank you Enrico!)
-* New option "App Selection" which helps you when selecting applications in Home tab: select/unselect outdated applications and save/restore selection
+* New option "App Selection" which allows you to quickly select specific applications (e.g. all outdated applications), and also save/restore a selection
 
 ### v1.4.0
 * Add full compatibility with ScriptCase 9
