@@ -898,9 +898,9 @@
 	fn.init();
 	fn.exportFn([
 		"appendScript", "loadSettingsFromBackgroundPage",
-		"isPage", "findElement", "getEditorIdentifier",
-		"getTopWindow", "getDocumentList", "getNumericKeyFromKeyCode",
-		"isGeneratingApp", "getProjectName", "getProjectVersion",
-		"createHashFromString"
+		"isPage", "findElement", "getScriptCaseVersion",
+		"getEditorIdentifier", "getTopWindow", "getDocumentList",
+		"getNumericKeyFromKeyCode", "isGeneratingApp", "getProjectName",
+		"getProjectVersion", "createHashFromString"
 	]);
 })();

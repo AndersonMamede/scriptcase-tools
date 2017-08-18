@@ -88,7 +88,7 @@
 				$([
 					"<span type='button' id='appSelection-toggleMenu' title='" + appSelectionTitle + "'>",
 						"<span class='ui-button-text'>",
-							"App Selection <span class='appSelection-currentSelectionCounter'></span>",
+							"[SCT] App Selection <span class='appSelection-currentSelectionCounter'></span>",
 						"</span>",
 					"</span>"
 				].join(""))
@@ -382,7 +382,7 @@
 	}
 	
 	window.loadSettingsFromBackgroundPage(function(sctSettings){
-		if(!sctSettings || !sctSettings.extEnabled){
+		if(!sctSettings || !sctSettings.extEnabled || !sctSettings.enableAppSelection){
 			return;
 		}
 		

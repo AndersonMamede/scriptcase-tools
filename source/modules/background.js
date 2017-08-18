@@ -11,6 +11,7 @@
 		"restoreDeploySettings" : false,
 		"preventSessionTimeout" : false,
 		"preventSessionTimeoutMinutes" : 15,
+		"enableAppSelection" : true,
 		"useNewEditor" : true,
 		"disableHoverOnMainMenu" : true,
 		"disableEditorLineWrapping" : true,
