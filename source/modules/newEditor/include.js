@@ -11,8 +11,8 @@
 	
 	var includeNewEditor = function(sctSettings, content){
 		window.appendScript(document, function(
-			sctSettings, editorIdentifier, newEditorPath, content,
-			isPageStr, findElementStr, getTopWindowStr, getDocumentListStr
+			sctSettings, editorIdentifier, newEditorPath, content, isPageStr,
+			findElementStr, getScriptCaseVersionStr, getTopWindowStr, getDocumentListStr
 		){
 			if(typeof editor == "undefined"){
 				return;
@@ -23,7 +23,8 @@
 					"isPage : (" + isPageStr + "),",
 					"getTopWindow : (" + getTopWindowStr + "),",
 					"getDocumentList : (" + getDocumentListStr + "),",
-					"findElement : (" + findElementStr + ")",
+					"findElement : (" + findElementStr + "),",
+					"getScriptCaseVersion : (" + getScriptCaseVersionStr + ")",
 				"};",
 			].join("\n"));
 			
@@ -269,11 +270,13 @@
 			var _addEditor = function(){
 				var $frameContainer = $("#id_div_code");
 				
+				var isAjaxEventsPage = fn.isPage("event.php") && $("[name='str_campos_param_list'").length;
+				
 				if(fn.isPage("app_template.php")){
 					$frameContainer = $("#tab-1");
 				}
 				
-				// toggleEditor is the function used to show/hide the menu on the right side
+				// toggleEditor is a function (native in ScriptCase) used to show/hide the menu on the right side
 				if(typeof window.toggleEditor == "function"){
 					var _toggleEditor = window.toggleEditor;
 					window.toggleEditor = function(str_option){
@@ -284,13 +287,40 @@
 					if($("#id_precodes").is(":visible")){
 						document.body.style.overflow = "";
 					}else{
-						// app_template.php => menu Layout -> Templates HTML
-						// the height of 'Templates HTML' page defined by ScriptCase is wrong, so
-						// it requires the scrollbar to show a full visible page of code
-						if(!fn.isPage(["app_template.php", "button.php"])){
+						if(isAjaxEventsPage && fn.getScriptCaseVersion() == 7){ // "Ajax Events"
+							// in "Ajax Events" for ScriptCase 7 there must be a vertical scroll
+							// because it has 2 blocks and the second one has to be visible all
+							// the time (it's the "Parameters (Fields)"" block) but there's a bug:
+							// when user collapses one of the blocks, both blocks are collapsed so
+							// the only way to see the second block is scrolling down
+							document.body.style.overflowX = "hidden";
+						}else if(!fn.isPage(["app_template.php", "button.php"])){
+							// app_template.php => menu Layout -> Templates HTML
+							// the height of 'Templates HTML' page defined by ScriptCase is wrong, so
+							// it requires the scrollbar to show a full visible page of code
 							document.body.style.overflow = "hidden";
 						}
 					}
+				}
+				
+				// the "Ajax Events" page is divided into 2 blocks: one for code editor and another one for
+				// "Parameters (Fields)" so the new editor can't cover the entire body, otherwise the
+				// "Parameters (Fields)" would be hidden
+				if(isAjaxEventsPage){
+					var _nm_toggle_table = window.nm_toggle_table;
+					window.nm_toggle_table = function(t, id){
+						// the id "_form_tab_block" is used more than one time but only the first "#_form_tab_block"
+						// should be intercepted
+						if($(t).closest("#_form_tab_block").get(0) == $("[id='_form_tab_block']").get(0)){
+							if($(t).hasClass("expand")){
+								$(editorFrame).show();
+							}else{
+								$(editorFrame).hide();
+							}
+						}
+						
+						_nm_toggle_table(t, id);
+					};
 				}
 				
 				var editorFrame = document.createElement("iframe");
@@ -300,7 +330,7 @@
 				editorFrame.style.position = "absolute";
 				editorFrame.style.top = 0;
 				editorFrame.style.marginTop = "26px";
-				editorFrame.style.paddingBottom = "26px";
+				editorFrame.style.paddingBottom = isAjaxEventsPage ? "50px" : "26px";
 				editorFrame.style.left = 0;
 				editorFrame.style.height = "100%";
 				editorFrame.style.opacity = 0.1;
@@ -384,8 +414,8 @@
 			
 			_addEditor();
 		},
-		sctSettings, editorIdentifier, newEditorPath, content,
-		window.isPage, window.findElement, window.getTopWindow, window.getDocumentList);
+		sctSettings, editorIdentifier, newEditorPath, content, window.isPage,
+		window.findElement, window.getScriptCaseVersion, window.getTopWindow, window.getDocumentList);
 	};
 	
 	window.loadSettingsFromBackgroundPage(function(sctSettings){
