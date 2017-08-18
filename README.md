@@ -1,4 +1,4 @@
-[![Installations](https://img.shields.io/badge/installations-1555-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools#firefox)
+[![Installations](https://img.shields.io/badge/installations-1557-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools#firefox)
 [![ScriptCase - v7 v8 v9](https://img.shields.io/badge/scriptcase-v7%20%7C%20v8%20%7C%20v9-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools/)
 [![Chrome WebStore](https://img.shields.io/badge/platform-Chrome-brightgreen.svg)](https://chrome.google.com/webstore/detail/scriptcase-tools/mfokofbgiajojbgginjeglebmpejnpdm?utm_source=chrome-app-launcher-info-dialog)
 [![Firefox](https://img.shields.io/badge/platform-Firefox-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools#firefox)
@@ -79,6 +79,7 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ### v1.4.1
 * Fix an issue which prevented the option "Parameters(Fields)" to be shown when editing an ajax event (thank you Enrico!)
+* New option "App Selection" which helps you when selecting applications in Home tab: select/unselect outdated applications and save/restore selection
 
 ### v1.4.0
 * Add full compatibility with ScriptCase 9
