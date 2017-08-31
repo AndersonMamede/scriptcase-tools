@@ -4,6 +4,7 @@
 [![Firefox](https://img.shields.io/badge/platform-Firefox-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools#firefox)
 [![Dependencies](https://img.shields.io/badge/dependencies-none-orange.svg)](https://github.com/AndersonMamede/scriptcase-tools/)
 [![License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://github.com/AndersonMamede/scriptcase-tools/blob/master/LICENSE)
+![Hits](https://hitt.herokuapp.com/AndersonMamede/scriptcase-tools.svg)
 
 # ScriptCase Tools
 A browser extension to make working with ScriptCase simpler and even more productive.
