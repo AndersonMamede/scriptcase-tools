@@ -1,7 +1,7 @@
 {
 	"manifest_version" : 2,
 	
-	"version" : "1.4.1",
+	"version" : "1.5.0",
 	"name" : "ScriptCase Tools",
 	"short_name" : "SCT",
 	"description" : "A browser extension to make working with ScriptCase simpler and more productive",
@@ -43,7 +43,7 @@
 			],
 			"js" : [
 				"modules/page_tools.js", "modules/session_ping.js",
-				"modules/deploy.js"
+				"modules/deploy.js", "modules/tab_shortcut.js"
 			],
 			"all_frames" : true
 		},
