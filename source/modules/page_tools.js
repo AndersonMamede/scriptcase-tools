@@ -42,7 +42,7 @@
 					fn.focusFirstField();
 				};
 				
-				if(fn.isPage(["iface/login.php", "iface/index.php"])){
+				if(fn.isPage([/iface\/$/i, "iface/login.php", "iface/index.php"])){
 					fn.findScriptCaseVersion(_init);
 				}else{
 					_init();
@@ -801,8 +801,8 @@
 			}
 			
 			// scriptcase doesn't store its version in a varible but it can be retrieved from a page;
-			// the page "errorhandler.php" was chosen because it's fast, small and it exists in SC 7, 8 and 9
-			var url = "errorhandler.php";
+			// the page "errorhandler.php" was chosen because it's fast, small, exists in SC 7/8/9 and doesn't require authentication
+			var url = new URL("./", window.location.href) + "errorhandler.php";
 			
 			fetch(url)
 				.then(function(response){
@@ -862,8 +862,13 @@
 				return page.length > 0;
 			}
 			
+			var currentUrl = window.location.href;
+			
+			if(page instanceof RegExp){
+				return currentUrl.match(page) !== null;
+			}
+			
 			if(typeof page == "string"){
-				var currentUrl = window.location.href;
 				return currentUrl.toLowerCase().indexOf(page.toLowerCase()) != -1;
 			}
 			
@@ -880,14 +885,6 @@
 			return isNaN(value) ? null : value;
 		},
 		
-		isGeneratingApp : function(_isGenerating){
-			if(typeof _isGenerating != "undefined"){
-				sessionStorage.setItem("sctAppIsBeingGenerated", !!_isGenerating);
-			}else{
-				return sessionStorage.getItem("sctAppIsBeingGenerated");
-			}
-		},
-		
 		exportFn : function(fnList){
 			fnList.forEach(function(fnName){
 				window[fnName] = fn[fnName];
@@ -900,7 +897,7 @@
 		"appendScript", "loadSettingsFromBackgroundPage",
 		"isPage", "findElement", "getScriptCaseVersion",
 		"getEditorIdentifier", "getTopWindow", "getDocumentList",
-		"getNumericKeyFromKeyCode", "isGeneratingApp", "getProjectName",
-		"getProjectVersion", "createHashFromString"
+		"getNumericKeyFromKeyCode", "getProjectName", "getProjectVersion",
+		"createHashFromString"
 	]);
 })();

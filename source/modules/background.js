@@ -12,6 +12,7 @@
 		"preventSessionTimeout" : false,
 		"preventSessionTimeoutMinutes" : 15,
 		"enableAppSelection" : true,
+		"enableTabShortcuts" : true,
 		"useNewEditor" : true,
 		"disableHoverOnMainMenu" : true,
 		"disableEditorLineWrapping" : true,
