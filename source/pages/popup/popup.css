@@ -132,9 +132,14 @@ input[type="checkbox"] + label{
 	color: #EA4875;
 }
 
-#enableAppSelection ~ label{
+.new{
+	display: inline-block;
+	padding: 2px 3px;
+	font-size: 11px;
+	border-radius: 3px;
 	font-weight: bold;
-	color: #A74DDE;
+	background: #F44336;
+	color: #FFE500;
 }
 
 .shortcut-keys-container:not(.active){
@@ -374,4 +379,9 @@ input[type="checkbox"] + label{
 #option-app-selection .image img{
 	margin: 20px 0;
 	border: 1px solid #CCC;
+}
+
+#option-tab-shortcuts .image{
+	margin: 15px 0;
+	text-align: center;
 }

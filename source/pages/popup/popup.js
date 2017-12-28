@@ -46,6 +46,14 @@ $(document).ready(function(){
 				"&nbsp;&nbsp;- restore a previously saved selection;",
 			"</div>"
 		].join(""),
+		"enableTabShortcuts" : [
+			"<div id='option-tab-shortcuts'>",
+				"When this feature is enabled, all open tabs inside ScriptCase (i.e. all aplications being edited) will have a ",
+				"number to be used as shortcut:",
+				"<div class='image'><img src='../../assets/img/tab-shortcuts.png' height='122'/></div>",
+				"Use <b>left ALT + number</b> to switch to a specific tab.",
+			"<div>"
+		].join(""),
 		"useNewEditor" : [
 			"Switch default code editor to a <u>newer</u> and <u>more complete</u> editor:<br><br>",
 			"<p><b>*</b> Sublime Text-based <u>key bindings</u> (e.g., jump to line, selext next/all occurrences, duplicate line, etc). ",
@@ -93,9 +101,9 @@ $(document).ready(function(){
 		],
 		checkbox : [
 			"extEnabled", "restoreDeploySettings", "preventSessionTimeout",
-			"enableAppSelection", "useNewEditor", "disableHoverOnMainMenu",
-			"disableEditorLineWrapping", "useShortcutKeys", "loadCursorBack",
-			"changeEditorFullscreen", "NE_enableLineWrapping"
+			"enableAppSelection", "enableTabShortcuts", "useNewEditor",
+			"disableHoverOnMainMenu", "disableEditorLineWrapping", "useShortcutKeys",
+			"loadCursorBack", "changeEditorFullscreen", "NE_enableLineWrapping"
 		]
 	};
 	
