@@ -78,6 +78,10 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ## Features
 
+### v1.5.0
+* New option "Tab shortcuts" to switch between open tabs in ScriptCase, i.e., applications being edited (left ALT + number)
+* Fix an issue which sometimes caused the new editor not to load properly
+
 ### v1.4.1
 * Fix an issue which prevented the option "Parameters(Fields)" to be shown when editing an ajax event (thank you Enrico!)
 * New option "App Selection" which allows you to quickly select specific applications (e.g. all outdated applications), and also save/restore a selection
