@@ -92,8 +92,8 @@ input[type="checkbox"] + label{
 	top: 0;
 	right: 0;
 	left: 0;
-	padding: 15px 0;
-	font-size: 26px;
+	padding: 10px 0;
+	font-size: 20px;
 	font-weight: 800;
 	text-align: center;
 	background: #00B7FF;
@@ -105,17 +105,17 @@ input[type="checkbox"] + label{
 }
 
 #form-field{
-	margin-top: 60px;
+	margin-top: 45px;
 }
 
 .field-container{
-	margin: 13px 0 10px 0;
+	margin: 7px 0 6px 0;
 }
 
 .field-container.editor{
 	border-top: 1px solid #DEDEDE;
-	padding-top: 17px;
-	margin-top: 19px;
+	padding-top: 12px;
+	margin-top: 14px;
 }
 
 .field-container.editor *{
