@@ -78,6 +78,11 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ## Features
 
+### v1.5.1
+* Improve the algorithm to identify the event which is being edited
+* Adjust the width of the extension's popup
+* Extension is disabled for ScriptCase v9.0.43+
+
 ### v1.5.0
 * New option "Tab shortcuts" to switch between open tabs in ScriptCase, i.e., applications being edited (left ALT + number)
 * Fix an issue which sometimes caused the new editor not to load properly
