@@ -429,7 +429,7 @@
 	};
 	
 	window.loadSettingsFromBackgroundPage(function(sctSettings){
-		if(!sctSettings || !sctSettings.extEnabled || !sctSettings.useNewEditor){
+		if(!sctSettings || !sctSettings.extEnabled || !sctSettings.useNewEditor || !sctSettings.isExtensionNecessary){
 			window.appendScript(document, function(newEditorPath, content){
 				$("html,body").addClass("useOriginalEditor");
 			});
