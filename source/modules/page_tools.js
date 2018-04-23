@@ -17,6 +17,10 @@
 				}
 				
 				var _init = function(){
+					if(!fn.isExtensionNecessary()){
+						return;
+					}
+					
 					fn.bindEvents();
 					
 					if(settings.disableHoverOnMainMenu){
@@ -50,11 +54,50 @@
 			});
 		},
 		
+		isExtensionNecessary : function(){
+			var sctExtensionIsNecessary = localStorage.getItem("sctExtensionIsNecessary");
+			if(typeof sctExtensionIsNecessary == "boolean"){
+				return sctExtensionIsNecessary;
+			}
+			
+			// for ScriptCase v9.00.0043+, NetMake has implemented this extension's funcionalities
+			// as native options so this extension won't be necessary
+			var isNecessary = true;
+			
+			if(parseFloat(fn.getScriptCaseVersion()) >= 9){
+				// if full version is unknown, then just disable it
+				if(!fn.getScriptCaseVersion(true)){
+					isNecessary = false;
+				}else{
+					// normalize ScriptCase's version because some versions are like '9.00.0043' and
+					// they should be normalized to '9.0.43'
+					var fullVersionArr = fn.getScriptCaseVersion(true).split(".");
+					var fullVersion = [
+						fn.strPad(parseFloat(fullVersionArr[0] || 0), 5, "0", "STR_PAD_LEFT"),
+						fn.strPad(parseFloat(fullVersionArr[1] || 0), 5, "0", "STR_PAD_LEFT"),
+						fn.strPad(parseFloat(fullVersionArr[2] || 0), 5, "0", "STR_PAD_LEFT")
+					].join("");
+					
+					// the first update with the same functionalities is 9.0.43, but it should be
+					// disable BEFORE it is released
+					if(fullVersion >= 90000000043){
+						isNecessary = false;
+					}
+				}
+			}
+			
+			localStorage.setItem("sctExtensionIsNecessary", isNecessary);
+			return isNecessary;
+		},
+		
 		loadSettingsFromBackgroundPage : function(callback){
 			browser.runtime.sendMessage({
 				command : "getSettings"
 			}, function(_settings){
 				settings = _settings || null;
+				if(settings){
+					settings.isExtensionNecessary = fn.isExtensionNecessary();
+				}
 				callback && callback(settings);
 			});
 		},
@@ -99,7 +142,19 @@
 		getScActiveTabName : function(){
 			var activeTab = fn.getScActiveTab();
 			var element = activeTab && activeTab.querySelector(".nmAbaAppText,.nmAbaAppTextNoClose");
-			return element && element.innerText.trim() || null;
+			var tabText = element ? element.innerText.trim() : "";
+			
+			if(!tabText || !tabText.length){
+				return null;
+			}
+			
+			// remove the tab number at the end of the text which is added by the 'tab shortcut' module
+			var match = tabText.match(/^(.+)\s\[\d+\]$/i);
+			if(match){
+				return match[1];
+			}else{
+				return tabText || null;
+			}
 		},
 		
 		getActiveDivCode : function(){
@@ -133,6 +188,14 @@
 					if(tplName && tplName.id){
 						return tplName.id;
 					}
+				}
+			}
+			
+			var codeMirrorElement = fn.findElement(".CodeMirror", true, activeIframeInnerDocuments);
+			if(codeMirrorElement){
+				var nmTextTitle = fn.findElement(".nmTextTitle", true, [codeMirrorElement.ownerDocument]);
+				if(nmTextTitle && nmTextTitle.innerText.trim().length){
+					return nmTextTitle.innerText.trim();
 				}
 			}
 			
@@ -788,16 +851,18 @@
 			window.open(docUrl);
 		},
 		
-		getScriptCaseVersion : function(){
-			return localStorage.getItem("sctScVersion");
+		getScriptCaseVersion : function(fullVersion){
+			var key = fullVersion ? "sctScFullVersion" : "sctScVersion";
+			return localStorage.getItem(key);
 		},
 		
 		findScriptCaseVersion : function(callback){
 			var version = fn.getScriptCaseVersion();
+			var fullVersion = fn.getScriptCaseVersion(true);
 			
-			if(version){
+			if(version && fullVersion){
 				callback && callback();
-				return version;
+				return;
 			}
 			
 			// scriptcase doesn't store its version in a varible but it can be retrieved from a page;
@@ -809,11 +874,16 @@
 					return response.text();
 				})
 				.then(function(content){
-					var result = content.match(/css\/scriptcase([0-9.]+)\.css/im);
+					var result = content.match(/css\/scriptcase([0-9.]+)\.css(\?v=([0-9.]+))?/im);
 					var version = result ? result[1].split("") : "";
+					var fullVersion = result ? result[3] : "";
 					
 					if(version && version[0]){
 						localStorage.setItem("sctScVersion", version[0]);
+					}
+					
+					if(fullVersion){
+						localStorage.setItem("sctScFullVersion", fullVersion);
 					}
 					
 					callback && callback();
@@ -889,6 +959,44 @@
 			fnList.forEach(function(fnName){
 				window[fnName] = fn[fnName];
 			});
+		},
+		
+		//  discuss at: http://locutus.io/php/str_pad/
+		strPad : function(input, padLength, padString, padType){
+			var half = "";
+			var padToGo;
+			
+			var _strPadRepeater = function(s, len){
+				var collect = "";
+				
+				while(collect.length < len){
+					collect += s;
+				}
+				collect = collect.substr(0, len);
+				
+				return collect
+			};
+			
+			input += "";
+			padString = padString !== undefined ? padString : " ";
+			
+			if(padType !== "STR_PAD_LEFT" && padType !== "STR_PAD_RIGHT" && padType !== "STR_PAD_BOTH"){
+				padType = "STR_PAD_RIGHT"
+			}
+			
+			if((padToGo = padLength - input.length) > 0){
+				if(padType === "STR_PAD_LEFT"){
+					input = _strPadRepeater(padString, padToGo) + input;
+				}else if(padType === "STR_PAD_RIGHT"){
+					input = input + _strPadRepeater(padString, padToGo);
+				}else if(padType === "STR_PAD_BOTH"){
+					half = _strPadRepeater(padString, Math.ceil(padToGo / 2));
+					input = half + input + half;
+					input = input.substr(0, padLength);
+				}
+			}
+			
+			return input;
 		}
 	};
 	
@@ -898,6 +1006,6 @@
 		"isPage", "findElement", "getScriptCaseVersion",
 		"getEditorIdentifier", "getTopWindow", "getDocumentList",
 		"getNumericKeyFromKeyCode", "getProjectName", "getProjectVersion",
-		"createHashFromString"
+		"createHashFromString", "isExtensionNecessary"
 	]);
 })();

@@ -150,6 +150,10 @@
 			return;
 		}
 		
+		if(!sctSettings.isExtensionNecessary){
+			return;
+		}
+		
 		// keydown event should be added in all documents so shortcut can work anywhere
 		document.addEventListener("keydown", function(evt){
 			if(evt.altKey && !evt.ctrlKey && !evt.shiftKey && window.getNumericKeyFromKeyCode(evt.keyCode)){

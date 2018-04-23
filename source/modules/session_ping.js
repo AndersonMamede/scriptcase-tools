@@ -20,6 +20,10 @@
 			return;
 		}
 		
+		if(!sctSettings.isExtensionNecessary){
+			return;
+		}
+		
 		window.appendScript(document, addPingInterval, sctSettings.preventSessionTimeoutMinutes);
 	});
 })();
