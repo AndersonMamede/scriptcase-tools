@@ -90,6 +90,13 @@ $(document).ready(function(){
 				"&nbsp;<label>Enable line/word wrapping</label>",
 				"<img src='/assets/img/icon-info.svg' class='info' data-info='NE_enableLineWrapping' width='16'/>",
 			"</div>"
+		].join(""),
+		"extensionIsNotNecessary" : [
+			"The <u>latest version of ScriptCase</u>, scheduled to be released at the end of April 2018, already comes ",
+			"with all the same options provided by this extension</b> (e.g. new editor, themes, shortcuts, etc).<br><br>",
+			"Therefore, this extension will not be necessary and it will stay disabled for ScriptCase <u>higher ",
+			"than 9.0.43</u>. You will still be able to use this extension for ScriptCase <strong>9.0.43 or below</strong>.<br><br>",
+			"You can send us any question or feedback through our <u class='show-feedback-form'>feedback form</u>."
 		].join("")
 	};
 	
@@ -114,6 +121,19 @@ $(document).ready(function(){
 		},
 		
 		loadSettings : function(){
+			chrome.tabs.query({active:true, currentWindow:true}, function(tab){
+				if(tab[0].url.indexOf("/devel/iface/") != -1){
+					chrome.tabs.executeScript(tab[0].id, {
+						code : "window.isExtensionNecessary ? window.isExtensionNecessary() : true"
+					}, function(rs){
+						var isExtensionNecessary = rs[0];
+						if(!isExtensionNecessary){
+							fn.blockBcIsNotNecessary();
+						}
+					});
+				}
+			});
+			
 			browser.runtime.sendMessage({command:"getSettings"}, function(_settings){
 				settings = _settings;
 				fn.loadSettingsToFields(_settings);
@@ -324,24 +344,9 @@ $(document).ready(function(){
 				});
 			});
 			
-			$("#send-message").click(function(){
-				Modal.show("feedback", {
-					title : "Let us know what you think",
-					content : $("#feedback-container").html(),
-					defaultButtonText : "Cancel",
-					defaultButtonClass : "opaque",
-					extraButton : {
-						"Send message" : function(){
-							var $button = $(this).blur();
-							var message = $.trim($("#feedback-message").val());
-							var email = $.trim($("#feedback-email").val());
-							return fn.sendMessage($button, message, email);
-						}
-					}
-				});
-				
-				$("#feedback-email").focus();
-			});
+			$("#send-message").click(fn.showFeedbackForm);
+			
+			$(document).on("click", ".show-feedback-form", fn.showFeedbackForm);
 			
 			$("#form-field").on("click", "#save-settings:not(.busy)", function(){
 				fn.saveSettings($(this).blur());
@@ -426,6 +431,33 @@ $(document).ready(function(){
 					callback && callback();
 				}, 800);
 			}, 500);
+		},
+		
+		showFeedbackForm : function(){
+			Modal.show("feedback", {
+				title : "Let us know what you think",
+				content : $("#feedback-container").html(),
+				defaultButtonText : "Cancel",
+				defaultButtonClass : "opaque",
+				extraButton : {
+					"Send message" : function(){
+						var $button = $(this).blur();
+						var message = $.trim($("#feedback-message").val());
+						var email = $.trim($("#feedback-email").val());
+						return fn.sendMessage($button, message, email);
+					}
+				}
+			});
+			
+			$("#feedback-email").focus();
+		},
+		
+		blockBcIsNotNecessary : function(){
+			Modal.show("info", {
+				defaultButton : false,
+				title : "Information",
+				content : modalContent.extensionIsNotNecessary
+			});
 		}
 	};
 	

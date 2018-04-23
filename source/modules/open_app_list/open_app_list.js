@@ -386,6 +386,10 @@
 			return;
 		}
 		
+		if(!sctSettings.isExtensionNecessary){
+			return;
+		}
+		
 		var projectName = window.getProjectName();
 		if(projectName){
 			window.appendScript(document, controller, projectName, window.createHashFromString);
