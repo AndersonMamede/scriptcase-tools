@@ -7,7 +7,8 @@
 body{
 	position: relative;
 	padding: 10px;
-	width: 450px;
+	width: 470px;
+	overflow-x: hidden;
 	font: normal 12px Verdana;
 	color: #616161;
 }
@@ -384,4 +385,8 @@ input[type="checkbox"] + label{
 #option-tab-shortcuts .image{
 	margin: 15px 0;
 	text-align: center;
+}
+
+.show-feedback-form{
+	cursor: pointer;
 }
