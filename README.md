@@ -78,6 +78,9 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ## Features
 
+### v1.6.1
+* Extension is disabled for ScriptCase >= v9
+
 ### v1.6.0
 * Extension is disabled for ScriptCase >= v9.0.43
 
