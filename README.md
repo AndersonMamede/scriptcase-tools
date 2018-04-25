@@ -78,6 +78,9 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 
 ## Features
 
+### v1.6.2
+* Adjust when checking ScriptCase's version
+
 ### v1.6.1
 * Extension is disabled for ScriptCase >= v9
 
