@@ -207,7 +207,10 @@
 	if(sctHelper.justInstalledExt()){
 		sctHelper.openHtmlPage("pages/welcome/index.html");
 	}else if(sctHelper.justUpdatedExt()){
-		sctHelper.openHtmlPage("pages/welcome/index.html#just-updated");
+		var manifestVersion = browser.runtime.getManifest().version;
+		if(manifestVersion != "1.6.1" && manifestVersion != "1.6.2"){
+			sctHelper.openHtmlPage("pages/welcome/index.html#just-updated");
+		}
 		sctHelper.updateInstallInfo();
 	}
 })();
