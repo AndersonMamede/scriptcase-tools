@@ -1,10 +1,7 @@
-[![Installations](https://img.shields.io/badge/installations-8056-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools#firefox)
+[![Installations](https://img.shields.io/badge/installations-10428-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools#firefox)
 [![ScriptCase - v7 v8 v9](https://img.shields.io/badge/scriptcase-v7%20%7C%20v8%20%7C%20v9-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools/)
 [![Chrome WebStore](https://img.shields.io/badge/platform-Chrome-brightgreen.svg)](https://chrome.google.com/webstore/detail/scriptcase-tools/mfokofbgiajojbgginjeglebmpejnpdm?utm_source=chrome-app-launcher-info-dialog)
 [![Firefox](https://img.shields.io/badge/platform-Firefox-brightgreen.svg)](https://github.com/AndersonMamede/scriptcase-tools#firefox)
-[![Dependencies](https://img.shields.io/badge/dependencies-none-orange.svg)](https://github.com/AndersonMamede/scriptcase-tools/)
-[![License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://github.com/AndersonMamede/scriptcase-tools/blob/master/LICENSE)
-![Hits](https://hitt.herokuapp.com/AndersonMamede/scriptcase-tools.svg)
 
 # ScriptCase Tools
 A browser extension to make working with ScriptCase simpler and even more productive.
