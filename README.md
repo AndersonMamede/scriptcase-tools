@@ -171,4 +171,5 @@ Licensed under the MIT License. Please see [LICENSE](LICENSE) for more informati
 	* F2 => Save current application (same as the save button in the toolbar)
 	* F7 => Give focus to code editor
 	* F8 => Generate source code for current application (same as the generate source code button in the toolbar)
-	* F9 => Run current application (same as the 
+	* F9 => Run current application (same as the run button in the toolbar, i.e. save, generate, and then run)
+	* F11 => Toggle code editor's fullscreen mode
